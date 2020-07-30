@@ -1,4 +1,4 @@
-'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   let User = sequelize.define('User', {
     email: DataTypes.STRING,
@@ -7,13 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     url_image: DataTypes.STRING,
     bio: DataTypes.STRING,
     admin: DataTypes.BOOLEAN
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-        models.User.hasMany(models.Message);
-      }
-    }
   });
   return User;
 };

@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   let Message = sequelize.define('Message', {
     idUSERS: DataTypes.INTEGER,
@@ -6,18 +5,6 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.STRING,
     attachement: DataTypes.STRING,
     likes: DataTypes.INTEGER
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-
-        models.Message.belongsTo(models.User, {
-          foreignKey: {
-            allowNull: false
-          }
-        })
-      }
-    }
   });
   return Message;
 };
