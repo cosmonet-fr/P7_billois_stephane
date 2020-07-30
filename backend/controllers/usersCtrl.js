@@ -10,8 +10,8 @@ exports.signup = (req, res, next) => {
       const user = User.create({
         email: req.body.email,
         username: req.body.username,
-        password: req.body.password
-        //password: hash
+        //password: req.body.password
+        password: hash
       });
       //Save dans la DB ici
 
