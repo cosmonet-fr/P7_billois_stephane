@@ -1,12 +1,11 @@
+const Sequelize = require('sequelize');
+const connectDB = require('../connectDB');
 
-module.exports = (sequelize, DataTypes) => {
-  let User = sequelize.define('User', {
-    email: DataTypes.STRING,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    url_image: DataTypes.STRING,
-    bio: DataTypes.STRING,
-    admin: DataTypes.BOOLEAN
+module.exports = connectDB.define('User', {
+    email: Sequelize.DataTypes.STRING,
+    username: Sequelize.DataTypes.STRING,
+    password: Sequelize.DataTypes.STRING,
+    url_image: Sequelize.DataTypes.STRING,
+    bio: Sequelize.DataTypes.STRING,
+    admin: Sequelize.DataTypes.BOOLEAN
   });
-  return User;
-};
