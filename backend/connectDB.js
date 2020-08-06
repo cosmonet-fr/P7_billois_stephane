@@ -1,6 +1,7 @@
+//Imports:
 const Sequelize = require('sequelize');
 
-// Sequelize
+// Sequelize:
 const sequelize = new Sequelize('groupomania_db_dev', 'bilbou', 'openclassrooms', {
   host: 'localhost',
   dialect: 'mariadb',
