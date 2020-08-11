@@ -5,7 +5,8 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize('groupomania_db_dev', 'bilbou', 'openclassrooms', {
   host: 'localhost',
   dialect: 'mariadb',
-  pool: { max :5, min:0, idle: 1000,},
+  //logging: true,
+  //pool: { max :5, min:0, idle: 1000,},
 });
 sequelize.authenticate()
   .then(() => console.log('Connexion à MariaDB réussie ! ʕ•ᴥ•ʔ '))
