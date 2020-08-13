@@ -4,6 +4,25 @@ const bodyParser = require('body-parser');
 const app = express();
 const usersRoute = require('./routes/usersRoute');
 const usersCtrl = require('./controllers/usersCtrl');
+const { body, validationResult } = require('express-validator');
+
+
+
+app.use(express.json());
+app.post('/test', [
+  // username must be an email
+  body('username').isEmail(),
+  // password must be at least 5 chars long
+  body('password').isLength({ min: 5 })
+], (req, res) => {
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  res.json("Email et mot de passe ok !!!");
+});
 
 // CROSS:
 app.use((req, res, next) => {

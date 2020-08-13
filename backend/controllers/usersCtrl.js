@@ -6,6 +6,9 @@ const User = require('../models/user');
 
 exports.signup = (req, res, next) => {
 
+
+
+
   console.table(req.body);
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
@@ -35,25 +38,26 @@ exports.login = (req, res, next) => {
 
   ////////////////////////::::
   async function login() {
+
     const login = await User.findOne({ where: { email: email } });
 if (login === null) {
-  return res.status(400).json({ errors: ["email ou mot de passe invalide"]  });
+  return res.status(400).json({ errors: ["Email ou mot de passe invalide"]  });
 
 } else {
   bcrypt.compare(req.body.password, login.password, function(err, result) {
       // result == true
 
       if (result === false) {
-        return res.status(400).json({ errors: ["email ou mot de passe invalide"]  });
+        return res.status(400).json({ errors: ["Email ou mot de passe invalide"]  });
 
       } else {
-        var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+        var token = jwt.sign({ foo: 'bar' }, 'TOKEN');
         return res.status(200).json({ token: token });
 
       }
   });
-  console.log(login instanceof User); // true
-  console.log(login.email); // 'My Title'
+  console.log(login instanceof User);
+  console.log(login.email);
 }
 
   }
