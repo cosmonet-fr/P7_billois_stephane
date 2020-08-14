@@ -8,12 +8,12 @@ const { body, validationResult } = require('express-validator');
 
 
 
-app.use(express.json());
+//app.use(express.json());
 app.post('/test', [
   // username must be an email
-  body('username').isEmail(),
+  body('username').isEmail().withMessage('Votre adresse email doit avoire la forme : mon-login@mon-domaine.org'),
   // password must be at least 5 chars long
-  body('password').isLength({ min: 5 })
+  body('password').isLength({ min: 5 }).withMessage('Votre mot de passe doit contenir au moins six caractères.')
 ], (req, res) => {
   // Finds the validation errors in this request and wraps them in an object with handy functions
   const errors = validationResult(req);
