@@ -2,6 +2,19 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const { validationResult } = require('express-validator');
+
+
+exports.test = (req, res, next) => {
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  res.json("Email et mot de passe ok !!!");
+}
+
 
 
 exports.signup = (req, res, next) => {
