@@ -8,9 +8,17 @@ const { body } = require('express-validator');
 router.post('/signup', [
   // username must be an email
   body('email').isEmail().withMessage('Votre adresse email doit avoire la forme : mon-login@mon-domaine.org'),
-  // password must be at least 5 chars long
+  // 255 chaeset max for bio
+  body('bio').isLength({ max: 255 }).withMessage('Votre biographie est limitée à 255 caractères.'),
+  // password must be at least 6 chars long
   body('password').isLength({ min: 6 }).withMessage('Votre mot de passe doit contenir au moins six caractères.')
 ], userCtrl.signup);
-router.post('/login', userCtrl.login);
+
+router.post('/login', [
+  // username must be an email
+  body('email').isEmail().withMessage('Votre adresse email doit avoire la forme : mon-login@mon-domaine.org'),
+  // password must be at least 6 chars long
+  body('password').isLength({ min: 6 }).withMessage('Votre mot de passe doit contenir au moins six caractères.')
+], userCtrl.login);
 
 module.exports = router;

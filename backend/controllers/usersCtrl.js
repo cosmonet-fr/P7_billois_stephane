@@ -34,6 +34,11 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
 
   console.table(req.body);
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
   //Récupération et validation des paramètres
   const email = req.body.email;
@@ -63,6 +68,7 @@ if (login === null) {
   });
   console.log(login instanceof User);
   console.log(login.email);
+  //res.json("Email et mot de passe ok !!!");
 }
 
   }
