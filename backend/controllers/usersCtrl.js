@@ -5,38 +5,30 @@ const User = require('../models/user');
 const { validationResult } = require('express-validator');
 
 
-exports.test = (req, res, next) => {
+exports.signup = (req, res, next) => {
   // Finds the validation errors in this request and wraps them in an object with handy functions
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
+  console.table(req.body);
+  bcrypt.hash(req.body.password, 10)
+  .then(hash => {
+    console.log(User);
+    const user = User.create({
+      email: req.body.email,
+      username: req.body.username,
+      url_image: req.body.url_image,
+      bio: req.body.bio,
+      //password: req.body.password
+      password: hash
+    });
+
+  })
   res.json("Email et mot de passe ok !!!");
 }
 
-
-
-exports.signup = (req, res, next) => {
-
-
-
-
-  console.table(req.body);
-  bcrypt.hash(req.body.password, 10)
-    .then(hash => {
-      console.log(User);
-      const user = User.create({
-        email: req.body.email,
-        username: req.body.username,
-        url_image: req.body.url_image,
-        bio: req.body.bio,
-        //password: req.body.password
-        password: hash
-      });
-
-    })
-};
 
 
 exports.login = (req, res, next) => {
