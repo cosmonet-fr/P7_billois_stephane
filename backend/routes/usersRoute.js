@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/usersCtrl');
 const { body } = require('express-validator');
+const auth = require('../auth')
 
 //const userCtrl = require('../controllers/userCtrl.js');
 
@@ -20,5 +21,7 @@ router.post('/login', [
   // password must be at least 6 chars long
   body('password').isLength({ min: 6 }).withMessage('Votre mot de passe doit contenir au moins six caractères.')
 ], userCtrl.login);
+router.get('/profil/:id', userCtrl.getProfil);
+router.get('/edit', auth, userCtrl.edit);
 
 module.exports = router;
