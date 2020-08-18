@@ -79,18 +79,27 @@ if (login === null) {
   login();
 };
 
+exports.getAllUsers = (req, res, next) => {
+  async function startGetAllUsers() {
+    const sequelize = require('../connectDB');
+    const { QueryTypes } = require('sequelize');
+    const usersList = await sequelize.query("SELECT username FROM Users", { type: QueryTypes.SELECT })
+    return res.status(200).json({userListe: usersList});
+  }
+  startGetAllUsers();
+}
 
 exports.getProfil = (req, res, next) => {
-  async function start0() {
+  async function startGetProfil() {
   const sequelize = require('../connectDB');
   const { QueryTypes } = require('sequelize');
-  const users = await sequelize.query("SELECT id, email, username, url_image, bio, admin, createdAt, updatedAt  FROM Users WHERE id='" + req.params.id + "'",  { type: QueryTypes.SELECT });
-  console.table(users);
+  const thisUser = await sequelize.query("SELECT id, email, username, url_image, bio, admin, createdAt, updatedAt  FROM Users WHERE id='" + req.params.id + "'",  { type: QueryTypes.SELECT });
+  console.table(thisUser);
   console.log(req.params.id);
-  return res.status(200).json({getUser: users});
+  return res.status(200).json({getUser: thisUser});
 
 }
-start0();
+startGetProfil();
 }
 exports.edit = (req, res, next) => {
   console.log('EDIT');
