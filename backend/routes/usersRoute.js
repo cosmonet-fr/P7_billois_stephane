@@ -32,10 +32,10 @@ userCtrl.login);
 router.post('/rm/:id', userCtrl.deleteProfil);
 
 // Get all users list
-router.get('/users_list', userCtrl.getAllUsers);
+router.get('/users', userCtrl.getAllUsers);
 
 // Get One profil
-router.get('/profil/:id', userCtrl.getProfil);
+router.get('/users/:id', userCtrl.getProfil);
 
 // Edit One profil
 router.put('/edit/:id',[ // Array for express-validator
