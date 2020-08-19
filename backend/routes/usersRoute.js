@@ -48,4 +48,11 @@ router.put('/edit/:id',[ // Array for express-validator
 ],
  userCtrl.edit);
 
+ // Edit password
+ router.put('/new_passwd/:id', [
+   // password must be at least 6 chars long
+   body('newPassword').isLength({ min: 6 }).withMessage('Votre mot de passe doit contenir au moins six caractères.')
+ ],
+userCtrl.newPassWd);
+
 module.exports = router;

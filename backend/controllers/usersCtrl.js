@@ -154,3 +154,30 @@ exports.edit = (req, res, next) => {
   startEditProfil()
   return res.status(201).json({edit: req.body})
 }
+
+exports.newPassWd = (req, res, next) => {
+  // Data validation with express-validator
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  const sequelize = require('../connectDB');
+  async function startNewPassWd() {
+    thisProfil = await User.findOne({ where: { id: req.params.id } });
+    bcrypt.compare(req.body.password, thisProfil.password, function(err, result) {
+      console.log(result);
+      console.log(req.body.password, thisProfil.password);
+      if (result === true) {
+        bcrypt.hash(req.body.newPassword, 10)
+        .then(hash => {
+          async function newPassInDb() {
+            await User.update({ password: hash }, { where: { id: req.params.id } });
+          }
+          newPassInDb();
+        })
+      }
+    });
+  }
+  startNewPassWd();
+  return res.status(200).json({message: 'Votre mot de passe à bien été modifié.'});
+}
