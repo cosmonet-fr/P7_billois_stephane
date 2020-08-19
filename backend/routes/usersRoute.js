@@ -32,13 +32,13 @@ userCtrl.login);
 router.post('/rm/:id', userCtrl.deleteProfil);
 
 // Get all users list
-router.get('/users', userCtrl.getAllUsers);
+router.get('/users', auth, userCtrl.getAllUsers);
 
 // Get One profil
-router.get('/users/:id', userCtrl.getProfil);
+router.get('/users/:id', auth, userCtrl.getProfil);
 
 // Edit One profil
-router.put('/edit/:id',[ // Array for express-validator
+router.put('/edit/:id', [ // Array for express-validator
   // username must be an email
   body('email').isEmail().withMessage('Votre adresse email doit avoire la forme : mon-login@mon-domaine.org'),
   // username not null
