@@ -24,6 +24,6 @@ router.post('/login', [
 router.get('/users_list', userCtrl.getAllUsers);
 router.get('/profil/:id', userCtrl.getProfil);
 router.post('/rm/:id', userCtrl.deleteProfil);
-router.get('/edit', auth, userCtrl.edit);
+router.put('/edit/:id', userCtrl.edit);
 
 module.exports = router;

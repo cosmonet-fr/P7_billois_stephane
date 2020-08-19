@@ -135,4 +135,11 @@ startDeleteProfil();
 
 exports.edit = (req, res, next) => {
   console.log('EDIT');
+  console.log(req.params.id);
+  const sequelize = require('../connectDB');
+  async function startEditProfil() {
+    await User.update({ bio: req.body.bio }, {where: {id: req.params.id}});
+  }
+  startEditProfil()
+  return res.status(201).json({edit: req.body})
 }
