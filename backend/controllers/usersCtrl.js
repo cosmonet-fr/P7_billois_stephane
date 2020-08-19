@@ -166,7 +166,6 @@ exports.newPassWd = (req, res, next) => {
     thisProfil = await User.findOne({ where: { id: req.params.id } });
     bcrypt.compare(req.body.password, thisProfil.password, function(err, result) {
       console.log(result);
-      console.log(req.body.password, thisProfil.password);
       if (result === true) {
         bcrypt.hash(req.body.newPassword, 10)
         .then(hash => {
@@ -175,9 +174,11 @@ exports.newPassWd = (req, res, next) => {
           }
           newPassInDb();
         })
+        return res.status(201).json({message: 'Votre mot de passe à bien été modifié.'});
+      } else if (result === false) {
+        return res.status(401).json({ errors: 'Mot de passe incorecte !' });
       }
     });
   }
   startNewPassWd();
-  return res.status(200).json({message: 'Votre mot de passe à bien été modifié.'});
 }
