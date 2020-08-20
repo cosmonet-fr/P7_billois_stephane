@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/usersCtrl');
 const { body } = require('express-validator');
-const auth = require('../auth')
+const auth = require('../auth');
+const auth2 = require('../auth2');
 
 
 // Signup
@@ -29,7 +30,7 @@ router.post('/login', [ // Array for express-validator
 userCtrl.login);
 
 // DELETE User
-router.post('/rm/:id', userCtrl.deleteProfil);
+router.post('/rm/:id', auth2, userCtrl.deleteProfil);
 
 // Get all users list
 router.get('/users', auth, userCtrl.getAllUsers);
@@ -38,7 +39,7 @@ router.get('/users', auth, userCtrl.getAllUsers);
 router.get('/users/:id', auth, userCtrl.getProfil);
 
 // Edit One profil
-router.put('/edit/:id', [ // Array for express-validator
+router.put('/edit/:id', auth2, [ // Array for express-validator
   // username must be an email
   body('email').isEmail().withMessage('Votre adresse email doit avoire la forme : mon-login@mon-domaine.org'),
   // username not null
@@ -49,7 +50,7 @@ router.put('/edit/:id', [ // Array for express-validator
  userCtrl.edit);
 
  // Edit password
- router.put('/new_passwd/:id', [
+ router.put('/new_passwd/:id', auth2, [
    // password must be at least 6 chars long
    body('newPassword').isLength({ min: 6 }).withMessage('Votre mot de passe doit contenir au moins six caractères.')
  ],
