@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+console.log(User);
 const { validationResult } = require('express-validator');
 
 
@@ -16,7 +17,6 @@ exports.signup = (req, res, next) => {
   console.table(req.body);
   bcrypt.hash(req.body.password, 10)
   .then(hash => {
-    console.log(User);
     const user = User.create({
       email: req.body.email,
       username: req.body.username,
@@ -83,21 +83,25 @@ exports.getAllUsers = (req, res, next) => {
     const { QueryTypes } = require('sequelize');
     const usersList = await sequelize.query("SELECT id, username, email FROM Users", { type: QueryTypes.SELECT })
     console.table(usersList);
-    return res.status(200).json({userListe: usersList});
+    return res.status(200).json(usersList);
   }
   startGetAllUsers();
 }
 
 exports.getProfil = (req, res, next) => {
   async function startGetProfil() {
-  const sequelize = require('../connectDB');
-  const { QueryTypes } = require('sequelize');
-  const thisUser = await sequelize.query("SELECT id, email, username, url_image, bio, admin, createdAt, updatedAt  FROM Users WHERE id='" + req.params.id + "'",  { type: QueryTypes.SELECT });
-  console.table(thisUser);
-  console.log(req.params.id);
-  return res.status(200).json({getUser: thisUser});
+    const sequelize = require('../connectDB');
+    const { QueryTypes } = require('sequelize');
+    const thisUser = await User.findOne({
+      where: { id: req.params.id },
+      attributes: ['id', 'email', 'username', 'url_image', 'bio', 'admin', 'createdAt', 'updatedAt' ]
+    });
+    console.log(thisUser);
+    //console.log(req.params.id);
+    return res.status(200).json(thisUser);
 
 }
+
 startGetProfil();
 }
 //DELETE
@@ -143,6 +147,7 @@ exports.edit = (req, res, next) => {
   // Add modif at MariaDb
   const sequelize = require('../connectDB');
   async function startEditProfil() {
+    console.debug(User);
     await User.update({
       email: req.body.email,
       username: req.body.username,
