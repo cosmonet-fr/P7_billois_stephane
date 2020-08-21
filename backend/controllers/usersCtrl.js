@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 
 
 
+
 // Signup
 exports.signup = (req, res, next) => {
   // Finds the validation errors in this request and wraps them in an object with handy functions
@@ -206,8 +207,16 @@ exports.newPassWd = (req, res, next) => {
 // TEST MULTER
 exports.test = (req, res, next) => {
   console.log(req.file);
-  console.log(req.body);
-  return res.status(201).json({message: 'Nouvelle Image !!!'});
+  const size = req.file.size;
+  const url_image = req.protocol + '://'+ req.get('host') + '/' + req.file.path;
+
+  console.log(url_image);
+
+  if (size < 100000) {
+    return res.status(201).json({message: 'Nouvelle Image !!!'});
+  } else {
+    return res.status(201).json({message: 'Votre image est trop lourde ! 500 ko max'});
+  }
 }
 
 //exports.test = (req, res, next) => {

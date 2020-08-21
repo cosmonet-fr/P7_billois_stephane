@@ -73,7 +73,7 @@ userCtrl.newPassWd);
 
 
 
-router.post('/test', multerConf, userCtrl.test);
+router.post('/test/:id(\\d+)', multerConf, userCtrl.test);
 
 
 module.exports = router;

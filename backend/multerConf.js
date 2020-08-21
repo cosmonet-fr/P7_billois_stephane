@@ -15,14 +15,8 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, callback) => {
     const extension = MIME_TYPES[file.mimetype];
-    callback(null, Date.now() + '_profilePic' + extension);
+    callback(null, req.params.id + '_avatar' + extension);
   }
 });
 
-module.exports = multer({storage: storage}).single('image');
-
-
-
-//const multerProfilPic = (userId) => {
-//  console.log(userId);
-//}
+module.exports = multer({storage: storage}).single('avatar');
