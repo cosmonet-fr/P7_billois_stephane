@@ -4,6 +4,10 @@ const userCtrl = require('../controllers/usersCtrl');
 const { body } = require('express-validator');
 const auth = require('../auth');
 const auth2 = require('../auth2');
+const multer = require('multer');
+const multerConf = require('../multerConf');
+const upload = multer({ dest: 'pictures/' })
+
 
 
 // Signup
@@ -20,6 +24,7 @@ router.post('/signup', [ // Array for express-validator
 userCtrl.signup);
 
 
+
 // Login
 router.post('/login', [ // Array for express-validator
   // username must be an email
@@ -29,14 +34,22 @@ router.post('/login', [ // Array for express-validator
 ],
 userCtrl.login);
 
+
+
 // DELETE User
 router.post('/rm/:id(\\d+)', auth2, userCtrl.deleteProfil);
+
+
 
 // Get all users list
 router.get('/users', auth, userCtrl.getAllUsers);
 
+
+
 // Get One profil
 router.get('/users/:id(\\d+)', auth, userCtrl.getProfil);
+
+
 
 // Edit One profil
 router.put('/edit/:id(\\d+)', auth2, [ // Array for express-validator
@@ -49,11 +62,18 @@ router.put('/edit/:id(\\d+)', auth2, [ // Array for express-validator
 ],
  userCtrl.edit);
 
+
+
  // Edit password
  router.put('/new_passwd/:id(\\d+)', auth2, [
    // password must be at least 6 chars long
    body('newPassword').isLength({ min: 6 }).withMessage('Votre mot de passe doit contenir au moins six caractères.')
  ],
 userCtrl.newPassWd);
+
+
+
+router.post('/test', multerConf, userCtrl.test);
+
 
 module.exports = router;

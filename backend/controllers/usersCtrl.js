@@ -4,9 +4,15 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 console.log(User);
 const { validationResult } = require('express-validator');
+const multer = require('multer');
+const upload = multer({ dest: 'pictures/' });
+const bodyParser = require('body-parser');
 
 
 
+
+
+// Signup
 exports.signup = (req, res, next) => {
   // Finds the validation errors in this request and wraps them in an object with handy functions
   const errors = validationResult(req);
@@ -32,6 +38,7 @@ exports.signup = (req, res, next) => {
 
 
 
+// Login
 exports.login = (req, res, next) => {
   // Finds the validation errors in this request and wraps them in an object with handy functions
   const errors = validationResult(req);
@@ -41,9 +48,6 @@ exports.login = (req, res, next) => {
 
   //Récupération et validation des paramètres
   const email = req.body.email;
-
-
-
 
   ////////////////////////::::
   async function login() {
@@ -77,6 +81,9 @@ if (login === null) {
   login();
 };
 
+
+
+// All users list
 exports.getAllUsers = (req, res, next) => {
   async function startGetAllUsers() {
     const sequelize = require('../connectDB');
@@ -88,6 +95,9 @@ exports.getAllUsers = (req, res, next) => {
   startGetAllUsers();
 }
 
+
+
+// Get one profil
 exports.getProfil = (req, res, next) => {
   async function startGetProfil() {
     const sequelize = require('../connectDB');
@@ -104,6 +114,9 @@ exports.getProfil = (req, res, next) => {
 
 startGetProfil();
 }
+
+
+
 //DELETE
 exports.deleteProfil = (req, res, next) => {
   async function startDeleteProfil() {
@@ -127,16 +140,13 @@ exports.deleteProfil = (req, res, next) => {
     });
     //return res.status(400).json({ errors: ["errors"]  });
     //return res.status(200).json({supprimer: thisProfil.username })
-
-
-
-
-
 }
 startDeleteProfil();
 }
 
 
+
+// Update Profil
 exports.edit = (req, res, next) => {
   // Data validation with express-validator
   const errors = validationResult(req);
@@ -160,6 +170,9 @@ exports.edit = (req, res, next) => {
   return res.status(201).json({edit: req.body})
 }
 
+
+
+// New Password
 exports.newPassWd = (req, res, next) => {
   // Data validation with express-validator
   const errors = validationResult(req);
@@ -187,3 +200,22 @@ exports.newPassWd = (req, res, next) => {
   }
   startNewPassWd();
 }
+
+
+
+// TEST MULTER
+exports.test = (req, res, next) => {
+  console.log(req.file);
+  console.log(req.body);
+  return res.status(201).json({message: 'Nouvelle Image !!!'});
+}
+
+//exports.test = (req, res, next) => {
+//  console.log(req.body.yo);
+//  const truc = JSON.parse(req);
+//  console.log(truc);
+
+// expected output: true
+  //const thingObject = JSON.parse(req.body);
+  //console.log(`${req.protocol}://${req.get('host')}/pictures/${req.file.filename}`);
+//};

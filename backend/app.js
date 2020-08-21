@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const usersRoute = require('./routes/usersRoute');
 const usersCtrl = require('./controllers/usersCtrl');
-
+const path = require('path');
 
 // CROSS:
 app.use((req, res, next) => {
@@ -17,6 +17,8 @@ app.use((req, res, next) => {
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use('/pictures', express.static(path.join(__dirname, 'pictures')));
 
 app.use('/', usersRoute);
 app.post('/test', function(req, res, next){
