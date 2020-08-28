@@ -24,17 +24,19 @@ exports.signup = (req, res, next) => {
   console.table(req.body);
   bcrypt.hash(req.body.password, 10)
   .then(hash => {
-    const user = User.create({
+    User.create({
       email: req.body.email,
       username: req.body.username,
       url_image: req.body.url_image,
       bio: req.body.bio,
       //password: req.body.password
       password: hash
-    });
+    }).then( user => { res.status(201).json({message: "Email et mot de passe ok !!!"} ); })
+    .catch(exception => { res.status(400).json({error: "email déjà présant dans la base de données !"} ) });
+
 
   })
-  res.json("Email et mot de passe ok !!!");
+
 }
 
 
