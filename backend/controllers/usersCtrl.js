@@ -150,7 +150,7 @@ startDeleteProfil();
 
 
 // Update Profil
-exports.edit = (req, res, next) => {}
+//exports.edit = (req, res, next) => {}
 
 
 
@@ -186,7 +186,7 @@ exports.newPassWd = (req, res, next) => {
 
 
 // TEST MULTER
-exports.test = (req, res, next) => {
+exports.edit = (req, res, next) => {
 
   // Data validation with express-validator
   const errors = validationResult(req);
