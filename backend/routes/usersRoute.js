@@ -6,7 +6,7 @@ const auth = require('../auth');
 const auth2 = require('../auth2');
 const multer = require('multer');
 const multerConf = require('../multerConf');
-const upload = multer({ dest: 'pictures/' })
+const upload = multer({ dest: 'pictures/' });
 
 
 

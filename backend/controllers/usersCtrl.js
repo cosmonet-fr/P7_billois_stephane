@@ -7,6 +7,8 @@ const { validationResult } = require('express-validator');
 const multer = require('multer');
 const upload = multer({ dest: 'pictures/' });
 const bodyParser = require('body-parser');
+const fs = require('fs');
+
 
 
 
@@ -150,7 +152,55 @@ startDeleteProfil();
 
 
 // Update Profil
-//exports.edit = (req, res, next) => {}
+exports.edit = (req, res, next) => {
+
+  // Data validation with express-validator
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  // Get req.body data
+  async function startEditProfil() {
+    console.debug(User);
+    await User.update({
+      email: req.body.email,
+      username: req.body.username,
+      bio: req.body.bio,
+    },
+    {where: {id: req.params.id}});
+  }
+  // Get url avatar fi she existed
+  async function startEditAvatar(url) {
+    console.debug(User);
+    await User.update({
+      url_image: url
+    },
+    {where: {id: req.params.id}});
+  }
+
+  if (req.file === undefined) {
+    startEditProfil()
+    return res.status(201).json({edit: req.body})
+
+  } else if (req.file !== undefined) {
+    const size = req.file.size;
+    const url_image = req.protocol + '://'+ req.get('host') + '/' + req.file.path;
+
+    
+    startEditProfil(); // For save req.body in the DB
+    startEditAvatar(url_image) // For save url of avatar in the DB
+
+
+    if (size < 2000000) {
+      startEditProfil()
+      return res.status(201).json({message: 'Nouvelle Image !!!'});
+    } else {
+      return res.status(201).json({message: 'Votre image est trop lourde ! 2 Mo max'});
+    }
+
+  }
+}
 
 
 
@@ -181,60 +231,4 @@ exports.newPassWd = (req, res, next) => {
     });
   }
   startNewPassWd();
-}
-
-
-
-// TEST MULTER
-exports.edit = (req, res, next) => {
-
-  // Data validation with express-validator
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  // Get req.body data
-  async function startEditProfil() {
-    console.debug(User);
-    await User.update({
-      email: req.body.email,
-      username: req.body.username,
-      bio: req.body.bio,
-    },
-    {where: {id: req.params.id}});
-  }
-  // Get url avatar fi she existed
-  async function startEditAvatar(url) {
-    console.debug(User);
-    await User.update({
-      url_image: url
-    },
-    {where: {id: req.params.id}});
-  }
-
-
-  console.log(req.file);
-  console.log(req.body);
-  if (req.file === undefined) {
-    startEditProfil()
-    return res.status(201).json({edit: req.body})
-
-  } else if (req.file !== undefined) {
-    const size = req.file.size;
-    const url_image = req.protocol + '://'+ req.get('host') + '/' + req.file.path;
-
-    console.log(url_image);
-    startEditProfil(); // For save req.body in the DB
-    startEditAvatar(url_image) // For save url of avatar in the DB
-
-
-    if (size < 100000) {
-      startEditProfil()
-      return res.status(201).json({message: 'Nouvelle Image !!!'});
-    } else {
-      return res.status(201).json({message: 'Votre image est trop lourde ! 500 ko max'});
-    }
-
-  }
 }
