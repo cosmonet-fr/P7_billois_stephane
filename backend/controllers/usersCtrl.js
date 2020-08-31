@@ -208,16 +208,49 @@ exports.newPassWd = (req, res, next) => {
 
 // TEST MULTER
 exports.test = (req, res, next) => {
+
+  // Get req.body data
+  async function startEditProfil() {
+    console.debug(User);
+    await User.update({
+      email: req.body.email,
+      username: req.body.username,
+      bio: req.body.bio,
+    },
+    {where: {id: req.params.id}});
+  }
+  // Get url avatar fi she existed
+  async function startEditAvatar(url) {
+    console.debug(User);
+    await User.update({
+      url_image: url
+    },
+    {where: {id: req.params.id}});
+  }
+
+
   console.log(req.file);
-  const size = req.file.size;
-  const url_image = req.protocol + '://'+ req.get('host') + '/' + req.file.path;
+  console.log(req.body);
+  if (req.file === undefined) {
+    startEditProfil()
+    return res.status(201).json({edit: req.body})
+    
+  } else if (req.file !== undefined) {
+    const size = req.file.size;
+    const url_image = req.protocol + '://'+ req.get('host') + '/' + req.file.path;
 
-  console.log(url_image);
+    console.log(url_image);
+    startEditProfil(); // For save req.body in the DB
+    startEditAvatar(url_image) // For save url of avatar in the DB
 
-  if (size < 100000) {
-    return res.status(201).json({message: 'Nouvelle Image !!!'});
-  } else {
-    return res.status(201).json({message: 'Votre image est trop lourde ! 500 ko max'});
+
+    if (size < 100000) {
+      startEditProfil()
+      return res.status(201).json({message: 'Nouvelle Image !!!'});
+    } else {
+      return res.status(201).json({message: 'Votre image est trop lourde ! 500 ko max'});
+    }
+
   }
 }
 

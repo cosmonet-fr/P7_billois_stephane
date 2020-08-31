@@ -52,7 +52,7 @@ router.get('/users/:id(\\d+)', auth, userCtrl.getProfil);
 
 
 // Edit One profil
-router.put('/edit/:id(\\d+)', auth2, [ // Array for express-validator
+router.put('/edit/:id(\\d+)', auth2, multerConf, [ // Array for express-validator
   // username must be an email
   body('email').isEmail().withMessage('Votre adresse email doit avoire la forme : mon-login@mon-domaine.org'),
   // username not null
@@ -73,7 +73,7 @@ userCtrl.newPassWd);
 
 
 
-router.post('/test/:id(\\d+)', multerConf, userCtrl.test);
+router.put('/test/:id(\\d+)', multerConf, userCtrl.test);
 
 
 module.exports = router;
