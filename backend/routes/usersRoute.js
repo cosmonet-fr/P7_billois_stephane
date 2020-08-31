@@ -73,7 +73,15 @@ userCtrl.newPassWd);
 
 
 
-router.put('/test/:id(\\d+)', multerConf, userCtrl.test);
+router.put('/test/:id(\\d+)', multerConf, [ // Array for express-validator
+  // username must be an email
+  body('email').isEmail().withMessage('Votre adresse email doit avoire la forme : mon-login@mon-domaine.org'),
+  // username not null
+  body('username').isLength({ min: 3, max: 255}).withMessage('Votre nom d\'utilisateur doit avoir entre 3 et 255 caractères. '),
+  // 255 chaeset max for bio
+  body('bio').isLength({ max: 255 }).withMessage('Votre biographie est limitée à 255 caractères.')
+],
+userCtrl.test);
 
 
 module.exports = router;

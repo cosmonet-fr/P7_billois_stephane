@@ -150,28 +150,7 @@ startDeleteProfil();
 
 
 // Update Profil
-exports.edit = (req, res, next) => {
-  // Data validation with express-validator
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
-  // Add modif at MariaDb
-  const sequelize = require('../connectDB');
-  async function startEditProfil() {
-    console.debug(User);
-    await User.update({
-      email: req.body.email,
-      username: req.body.username,
-      bio: req.body.bio,
-      url_image: req.body.url_image
-    },
-      {where: {id: req.params.id}});
-  }
-  startEditProfil()
-  return res.status(201).json({edit: req.body})
-}
+exports.edit = (req, res, next) => {}
 
 
 
@@ -209,6 +188,12 @@ exports.newPassWd = (req, res, next) => {
 // TEST MULTER
 exports.test = (req, res, next) => {
 
+  // Data validation with express-validator
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   // Get req.body data
   async function startEditProfil() {
     console.debug(User);
@@ -234,7 +219,7 @@ exports.test = (req, res, next) => {
   if (req.file === undefined) {
     startEditProfil()
     return res.status(201).json({edit: req.body})
-    
+
   } else if (req.file !== undefined) {
     const size = req.file.size;
     const url_image = req.protocol + '://'+ req.get('host') + '/' + req.file.path;
@@ -253,13 +238,3 @@ exports.test = (req, res, next) => {
 
   }
 }
-
-//exports.test = (req, res, next) => {
-//  console.log(req.body.yo);
-//  const truc = JSON.parse(req);
-//  console.log(truc);
-
-// expected output: true
-  //const thingObject = JSON.parse(req.body);
-  //console.log(`${req.protocol}://${req.get('host')}/pictures/${req.file.filename}`);
-//};
