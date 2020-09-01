@@ -44,5 +44,18 @@ exports.wallOf = (req, res, next) => {
     return res.status(200).json(thisWall);
   }
   getTheWallOf(req.params.id);
+}
 
+exports.onePost = (req, res, next) => {
+  async function getOnePost(id) {
+    const sequelize = require('../connectDB');
+    //const { QueryTypes } = require('sequelize');
+    const thisPost = await Message.findOne({
+      where: { id: id },
+      attributes: ['id', 'idUSERS', 'title', 'content', 'attachement', 'likes', 'createdAt', 'updatedAt' ]
+    });
+    //console.log(req.params.id);
+    return res.status(200).json(thisPost);
+  }
+  getOnePost(req.params.id_post)
 }

@@ -13,6 +13,9 @@ router.post('/new/:id(\\d+)', auth2, messagesCtrl.new);
 router.get('/public_wall', auth, messagesCtrl.publicWall);
 
 //User's Wall
-router.get('/wall_of/:id', auth, messagesCtrl.wallOf);
+router.get('/wall_of/:id(\\d+)', auth, messagesCtrl.wallOf);
+
+//Get one post
+router.get('/post/:id_post(\\d+)', auth, messagesCtrl.onePost);
 
 module.exports = router;
