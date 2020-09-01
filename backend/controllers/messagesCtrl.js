@@ -29,3 +29,20 @@ exports.publicWall = ( req, res, next) => {
   }
   getThePublicWall();
 }
+
+//User's Wall
+exports.wallOf = (req, res, next) => {
+  async function getTheWallOf(id) {
+    const sequelize = require('../connectDB');
+    //const { QueryTypes } = require('sequelize');
+    const thisWall = await Message.findAll({
+      where: { idUSERS: id },
+      attributes: ['id', 'idUSERS', 'title', 'content', 'attachement', 'likes', 'createdAt', 'updatedAt' ]
+    });
+    console.table(thisWall);
+    //console.log(req.params.id);
+    return res.status(200).json(thisWall);
+  }
+  getTheWallOf(req.params.id);
+
+}
