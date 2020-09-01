@@ -1,10 +1,10 @@
-module.exports = (sequelize, DataTypes) => {
-  let Message = sequelize.define('Message', {
-    idUSERS: DataTypes.INTEGER,
-    title: DataTypes.STRING,
-    content: DataTypes.STRING,
-    attachement: DataTypes.STRING,
-    likes: DataTypes.INTEGER
+const Sequelize = require('sequelize');
+const connectDB = require('../connectDB');
+
+module.exports = connectDB.define('Message', {
+  idUSERS: Sequelize.DataTypes.INTEGER,
+  title: Sequelize.DataTypes.STRING,
+  content: Sequelize.DataTypes.STRING,
+  attachement: Sequelize.DataTypes.STRING,
+  likes: Sequelize.DataTypes.INTEGER
   });
-  return Message;
-};

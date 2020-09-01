@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const usersRoute = require('./routes/usersRoute');
+const messagesRoute = require('./routes/messagesRoute');
 const usersCtrl = require('./controllers/usersCtrl');
 const path = require('path');
 
@@ -21,7 +22,6 @@ app.use(express.json());
 app.use('/pictures', express.static(path.join(__dirname, 'pictures')));
 
 app.use('/', usersRoute);
-app.post('/test', function(req, res, next){
-  console.log(req.body);
-});
+app.use('/message', messagesRoute);
+
 module.exports = app;
