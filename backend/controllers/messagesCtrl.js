@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const Message = require('../models/message');
 
-// Signup
+// new Message
 exports.new = (req, res, next) => {
   console.log("Nouveau message !!!");
   console.log(req.params);
@@ -14,6 +14,18 @@ exports.new = (req, res, next) => {
 
   }
   newMessage()
-
   return res.status(201).json({newMessage: req.body });
+}
+
+// Get the public wall
+exports.publicWall = ( req, res, next) => {
+  console.log("Welcom to the Public Wall !");
+  async function getThePublicWall() {
+    const sequelize = require('../connectDB');
+    const { QueryTypes } = require('sequelize');
+    const publicWall = await sequelize.query("SELECT * FROM Messages", { type: QueryTypes.SELECT })
+    console.table(publicWall);
+    return res.status(200).json(publicWall);
+  }
+  getThePublicWall();
 }

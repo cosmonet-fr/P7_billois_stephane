@@ -7,7 +7,10 @@ const Message = require('../models/message');
 
 
 //new Message
-router.post('/new/:id(\\d+)', messagesCtrl.new);
+router.post('/new/:id(\\d+)', auth2, messagesCtrl.new);
+
+//Public Wall
+router.get('/public_wall', auth, messagesCtrl.publicWall);
 
 
 module.exports = router;
