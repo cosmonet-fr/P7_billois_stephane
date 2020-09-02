@@ -13,9 +13,6 @@ exports.new = (req, res, next) => {
 
 // update Message
 exports.edit = (req, res, next) => {
-  console.table(req.params);
-  console.log(req.params.idUSER);
-  console.log(req.params.idPOST);
   async function editMessage() {
     await Message.update({title: req.body.title, content: req.body.message }, {
       where: { id: req.params.idPOST }
@@ -23,6 +20,17 @@ exports.edit = (req, res, next) => {
   }
   editMessage();
   return res.status(201).json({editMessage: req.body})
+}
+
+//Delete Message
+exports.deleteMessage = (req, res, next) => {
+  async function deleteMessage() {
+    await Message.destroy({
+      where: { id: req.params.idPOST }
+    })
+  }
+  deleteMessage();
+  return res.status(200).json({ Delete: req.params.idPOST })
 }
 
 // Get the public wall

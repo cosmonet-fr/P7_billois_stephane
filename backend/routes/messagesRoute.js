@@ -10,7 +10,10 @@ const Message = require('../models/message');
 router.post('/new/:id(\\d+)', auth2, messagesCtrl.new);
 
 //update Message
-router.post('/edit/:id&:idPOST', auth2, messagesCtrl.edit);
+router.put('/edit/:id&:idPOST', auth2, messagesCtrl.edit);
+
+//DELETE Message !
+router.delete('/rm/:id&:idPOST', auth2, messagesCtrl.deleteMessage);
 
 //Public Wall
 router.get('/public_wall', auth, messagesCtrl.publicWall);
