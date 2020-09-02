@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../auth');
 const auth2 = require('../auth2');
+const ownerControl = require('../ownerControl');
 const messagesCtrl = require('../controllers/messagesCtrl');
 const Message = require('../models/message');
 
@@ -10,10 +11,10 @@ const Message = require('../models/message');
 router.post('/new/:id(\\d+)', auth2, messagesCtrl.new);
 
 //update Message
-router.put('/edit/:id&:idPOST', auth2, messagesCtrl.edit);
+router.put('/edit/:id&:idPOST', auth2, ownerControl, messagesCtrl.edit);
 
 //DELETE Message !
-router.delete('/rm/:id&:idPOST', auth2, messagesCtrl.deleteMessage);
+router.delete('/rm/:id&:idPOST', auth2, ownerControl, messagesCtrl.deleteMessage);
 
 //Public Wall
 router.get('/public_wall', auth, messagesCtrl.publicWall);
