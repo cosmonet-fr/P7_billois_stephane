@@ -3,23 +3,30 @@ const Message = require('../models/message');
 
 // new Message
 exports.new = (req, res, next) => {
-  console.log("Nouveau message !!!");
-  console.log(req.params);
-  console.log(req.body);
   async function newMessage() {
-    console.log("Je passe ici !");
     await Message.create({idUSERS: req.params.id, title: req.body.title, content: req.body.message });
     //const newMessage = await Message.create({ idUSER: req.params, title: "Mon 1er titre !", content: "Mon 1er post !" });
-    console.log("Je repasse par là !");
-
   }
   newMessage()
   return res.status(201).json({newMessage: req.body });
 }
 
+// update Message
+exports.edit = (req, res, next) => {
+  console.table(req.params);
+  console.log(req.params.idUSER);
+  console.log(req.params.idPOST);
+  async function editMessage() {
+    await Message.update({title: req.body.title, content: req.body.message }, {
+      where: { id: req.params.idPOST }
+    })
+  }
+  editMessage();
+  return res.status(201).json({editMessage: req.body})
+}
+
 // Get the public wall
 exports.publicWall = ( req, res, next) => {
-  console.log("Welcom to the Public Wall !");
   async function getThePublicWall() {
     const sequelize = require('../connectDB');
     const { QueryTypes } = require('sequelize');
@@ -46,6 +53,7 @@ exports.wallOf = (req, res, next) => {
   getTheWallOf(req.params.id);
 }
 
+// Get one Post
 exports.onePost = (req, res, next) => {
   async function getOnePost(id) {
     const sequelize = require('../connectDB');

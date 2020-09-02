@@ -9,6 +9,9 @@ const Message = require('../models/message');
 //new Message
 router.post('/new/:id(\\d+)', auth2, messagesCtrl.new);
 
+//update Message
+router.post('/edit/:id&:idPOST', auth2, messagesCtrl.edit);
+
 //Public Wall
 router.get('/public_wall', auth, messagesCtrl.publicWall);
 
