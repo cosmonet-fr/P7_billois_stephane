@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const usersRoute = require('./routes/usersRoute');
 const messagesRoute = require('./routes/messagesRoute');
+const adminRoute = require('./routes/adminRoute');
 const usersCtrl = require('./controllers/usersCtrl');
 const path = require('path');
 
@@ -23,5 +24,6 @@ app.use('/pictures', express.static(path.join(__dirname, 'pictures')));
 
 app.use('/', usersRoute);
 app.use('/message', messagesRoute);
+app.use('/admin_panel', adminRoute);
 
 module.exports = app;

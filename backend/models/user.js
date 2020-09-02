@@ -7,5 +7,6 @@ module.exports = connectDB.define('User', {
     password: Sequelize.DataTypes.STRING,
     url_image: Sequelize.DataTypes.STRING,
     bio: Sequelize.DataTypes.STRING,
-    admin: Sequelize.DataTypes.BOOLEAN
+    admin: Sequelize.DataTypes.BOOLEAN,
+    moderator: Sequelize.DataTypes.BOOLEAN
   });
