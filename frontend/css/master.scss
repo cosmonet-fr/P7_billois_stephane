@@ -1,7 +1,10 @@
 @import "minireset.scss";
 $color1: #fd2d01;
+$color2: #040404;
+$colorBtn: #3498db;
 $backgrounColor1: white;
-$backgrounColor2: rgba(255, 255, 255, .5);
+$backgrounColor2: rgba(255, 255, 255, .7);
+$backgroundTransparent: rgba(255, 255, 255, 0);
 @font-face {
     font-family: 'nevis-FontZillion';
     src: url('../fonts/nevis-FontZillion/Fonts/nevis.ttf') format('truetype');
@@ -18,6 +21,10 @@ h1 {
   font-family: "nevis-FontZillion";
   font-size: 5em;
   color: $color1;
+}
+h2 {
+  font-size: 4em;
+  font-weight: bold;
 }
 p {
   font-size: 2.8em;
@@ -41,16 +48,34 @@ header {
 
 .boxForm {
   padding: 0.5em;
-  margin: 3em;
+  margin: 15em 3em 3em 3em;
   background-color: $backgrounColor2;
 }
 
 input {
   font-size: 0.7em;
   padding: 1em;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 4px;
+  border-bottom-color: $color2;
+  background-color: $backgroundTransparent;
+
 }
 .line{
   margin: 3em;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+input[type="submit"]{
+  border-radius: 50% 20% / 10% 40%;
+  padding: 1.5em;
+  cursor:pointer;
+  font-weight: bold;
+  color: $backgrounColor1;
+  font-size: 2em;
+  background-color: $colorBtn;
+  border-width: 0;
 }
