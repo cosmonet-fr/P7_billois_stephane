@@ -6,5 +6,8 @@ module.exports = connectDB.define('Message', {
   title: Sequelize.DataTypes.STRING,
   content: Sequelize.DataTypes.TEXT,
   attachement: Sequelize.DataTypes.STRING,
-  likes: Sequelize.DataTypes.INTEGER
+  likes: Sequelize.DataTypes.INTEGER,
+  is_posted: Sequelize.DataTypes.BOOLEAN,
+  parent: Sequelize.DataTypes.INTEGER,
+
   });
