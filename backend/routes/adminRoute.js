@@ -9,7 +9,7 @@ const isModerator = require('../isModerator');
 router.put('/is_moderator/:id(\\d+)', auth, isAdmin, adminCtrl.isModerator);
 
 //DELETE Message !
-router.delete('/postRm/:idPOST', auth, isModerator, adminCtrl.deleteMessage);
+router.delete('/postRm/:idPOST(\\d+)', auth, isModerator, adminCtrl.deleteMessage);
 
 //DELETE simple User !
 router.delete('/userRm', auth, isModerator, adminCtrl.deleteSimpleUser);

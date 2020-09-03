@@ -4,8 +4,7 @@ const Message = require('../models/message');
 // new Message
 exports.new = (req, res, next) => {
   async function newMessage() {
-    await Message.create({idUSERS: req.params.id, title: req.body.title, content: req.body.message });
-    //const newMessage = await Message.create({ idUSER: req.params, title: "Mon 1er titre !", content: "Mon 1er post !" });
+    await Message.create({user_id: req.params.id, title: req.body.title, content: req.body.message });
   }
   newMessage()
   return res.status(201).json({newMessage: req.body });
@@ -51,8 +50,8 @@ exports.wallOf = (req, res, next) => {
     const sequelize = require('../connectDB');
     //const { QueryTypes } = require('sequelize');
     const thisWall = await Message.findAll({
-      where: { idUSERS: id },
-      attributes: ['id', 'idUSERS', 'title', 'content', 'attachement', 'likes', 'createdAt', 'updatedAt' ]
+      where: { user_id: id },
+      attributes: ['id', 'user_id', 'title', 'content', 'attachement', 'likes', 'createdAt', 'updatedAt' ]
     });
     console.table(thisWall);
     //console.log(req.params.id);
@@ -68,7 +67,7 @@ exports.onePost = (req, res, next) => {
     //const { QueryTypes } = require('sequelize');
     const thisPost = await Message.findOne({
       where: { id: id },
-      attributes: ['id', 'idUSERS', 'title', 'content', 'attachement', 'likes', 'createdAt', 'updatedAt' ]
+      attributes: ['id', 'user_id', 'title', 'content', 'attachement', 'likes', 'createdAt', 'updatedAt' ]
     });
     //console.log(req.params.id);
     return res.status(200).json(thisPost);

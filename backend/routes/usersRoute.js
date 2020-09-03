@@ -37,7 +37,7 @@ userCtrl.login);
 
 
 // DELETE User
-router.post('/rm/:id(\\d+)', auth2, userCtrl.deleteProfil);
+router.delete('/rm/:id(\\d+)', auth2, userCtrl.deleteProfil);
 
 
 

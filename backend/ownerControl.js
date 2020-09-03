@@ -7,9 +7,9 @@ module.exports = (req, res, next) => {
     console.log('Ok');
     const ownerId = await Message.findOne({
       where: {id: req.params.idPOST},
-      attributes: [ 'idUSERS' ]
+      attributes: [ 'user_id' ]
     })
-    if (ownerId.idUSERS == req.params.id) {
+    if (ownerId.user_id == req.params.id) {
       next();
 
     } else {
