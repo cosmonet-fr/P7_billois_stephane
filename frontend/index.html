@@ -10,33 +10,83 @@
       <img class="logo" src="pictures/logos/icon.svg" alt="Logo Groupomania">
       <h1>Groupomania</h1>
     </header>
-    <section class="connectPage">
-      <article class="boxForm">
-        <form method="post" action="">
-          <div class="line">
-            <h2>Connexion</h2>
-          </div>
-          <div class="line">
-            <!--<p><label for="email">email :</label></p>-->
-            <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" /></p>
+    <div class="slogan">
+      <h2>Social <span>Network</span></h2>
 
-          </div>
-          <div class="line">
-            <!--<p><label for="password">mot de passe :</label></p>-->
-            <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" /></p>
+    </div>
+    <div id="app">
+      <section v-if="signup > 0">
+        <article class="boxForm">
+          <form method="post" action="">
+            <div class="line">
+              <h3>Connexion</h3>
+            </div>
+            <div class="line">
+              <!--<p><label for="email">email :</label></p>-->
+              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" /></p>
 
-          </div>
-          <div class="line">
-            <input class="button" type="submit" value="Envoyer" />
-          </div>
-        </form>
+            </div>
+            <div class="line">
+              <!--<p><label for="password">mot de passe :</label></p>-->
+              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" /></p>
 
-      </article>
-    </section>
+            </div>
+            <div class="line">
+              <p v-on:click="signup = 0" class="a">{{ message }}</p>
+            </div>
+            <div class="line">
+              <input class="button" type="submit" value="Envoyer" />
+            </div>
+          </form>
 
-    <script src="<https://cdn.jsdelivr.net/npm/vue>"></script>
+        </article>
+      </section>
+
+      <!--Signup-->
+      <section v-if="signup < 1">
+        <article class="boxForm">
+          <form id="signup" method="post" action="#">
+            <div class="line">
+              <h3>Créez un compte</h3>
+            </div>
+            <div class="line">
+              <!--<p><label for="email">email :</label></p>-->
+              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" /></p>
+
+            </div>
+            <div class="line">
+              <!--<p><label for="password">mot de passe :</label></p>-->
+              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" /></p>
+
+            </div>
+            <div class="line">
+              <!--<p><label for="password">mot de passe :</label></p>-->
+              <p><input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmez votre mot de passe" size="25" maxlength="255" /></p>
+
+            </div>
+            <div class="line">
+              <p v-on:click="signup = 1" class="a">Vous connectez</p>
+            </div>
+            <div class="line">
+              <input class="button" type="submit" value="Inscription" />
+            </div>
+          </form>
+
+        </article>
+      </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-      console.log(Vue)
+    //console.log(Vue);
+      const app = new Vue({
+        el: "#app",
+        data: {
+          message: "Vous n'avez pas encore de compte ? Créez-en un !",
+          signup: 1,
+        },
+      });
     </script>
+    <script src="signup.js" charset="utf-8"></script>
   </body>
 </html>

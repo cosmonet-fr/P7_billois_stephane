@@ -3,7 +3,7 @@ $color1: #fd2d01;
 $color2: #040404;
 $colorBtn: #3498db;
 $backgrounColor1: white;
-$backgrounColor2: rgba(255, 255, 255, .7);
+$backgrounColor2: rgba(255, 255, 255, .8);
 $backgroundTransparent: rgba(255, 255, 255, 0);
 @font-face {
     font-family: 'nevis-FontZillion';
@@ -23,11 +23,32 @@ h1 {
   color: $color1;
 }
 h2 {
+  font-family: "nevis-FontZillion";
+  font-size: 7em;
+  color: $backgrounColor1;
+  font-weight: 400;
+  span {
+    font-weight: 100;
+    color: $color1;
+    position: relative;
+    top: 114px; right: 160px;
+  }
+}
+h3 {
   font-size: 4em;
   font-weight: bold;
 }
 p {
-  font-size: 2.8em;
+  font-size: 2.5em;
+}
+
+a, .a {
+  color: $colorBtn;
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover{
+    text-decoration: none;
+  }
 }
 
 body {
@@ -44,6 +65,10 @@ header {
 .logo {
   width: 10%;
   height: 10%;
+}
+
+.slogan {
+  margin: 4em 0 0 5em;
 }
 
 .boxForm {
