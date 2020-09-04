@@ -17,13 +17,13 @@
     <div id="app">
       <section v-if="signup > 0">
         <article class="boxForm">
-          <form method="post" action="">
+          <form id="login" @submit.prevent="submitLogin">
             <div class="line">
               <h3>Connexion</h3>
             </div>
             <div class="line">
               <!--<p><label for="email">email :</label></p>-->
-              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" /></p>
+              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="email" /></p>
 
             </div>
             <div class="line">
@@ -89,6 +89,8 @@
         data: {
           message: "Vous n'avez pas encore de compte ? Créez-en un !",
           signup: 1,
+          email: '',
+          password: '',
           newEmail: '',
           newUserName: '',
           newPassword: '',
@@ -96,16 +98,28 @@
         },
         methods: {
           submitSignup() {
-            console.log(this.newEmail, this.newUserName, this.newPassword);
+
             axios.post('http://localhost:3000/signup', {
-              email: newEmail,
-              username: newUserName,
-              password: newPassword
+              email: this.newEmail,
+              username: this.newUserName,
+              password: this.newPassword
             });
+
+          }
+        },
+        methods: {
+          submitLogin() {
+            console.log(this.email, this.password);
+            axios.post('http://localhost:3000/login', {
+              email: this.email,
+              password: this.password
+            });
+
           }
         },
       });
     </script>
-    <script src="signup.js" charset="utf-8"></script>
+    <!--<script src="signup.js" charset="utf-8"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </body>
 </html>
