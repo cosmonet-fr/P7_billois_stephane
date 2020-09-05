@@ -41,6 +41,7 @@ exports.deleteSimpleUser = (req, res, next) => {
       })
       return res.status(200).json({remove: idToRemove})
     }
+    //return res.status(400).json({error: "problème inattendu"})
   }
   deleteSimpleUser(req.body.idRm)
 }

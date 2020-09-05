@@ -134,7 +134,7 @@ exports.deleteProfil = (req, res, next) => {
       if (result === true && magicPhrase === req.body.magicPhrase) {
         async function startDeleteProfilSQL() {
           const { QueryTypes } = require('sequelize');
-          const SqlQueryForDelete = await sequelize.query("DELETE FROM Users WHERE id='" + req.params.id + "'",  { type: QueryTypes.DELETE });
+          const SqlQueryForDelete = await sequelize.query("DELETE Users FROM Users WHERE id='" + req.params.id + "'",  { type: QueryTypes.DELETE });
         }
         startDeleteProfilSQL();
         return res.status(200).json({supprimer: thisProfil.username })
@@ -187,7 +187,7 @@ exports.edit = (req, res, next) => {
     const size = req.file.size;
     const url_image = req.protocol + '://'+ req.get('host') + '/' + req.file.path;
 
-    
+
     startEditProfil(); // For save req.body in the DB
     startEditAvatar(url_image) // For save url of avatar in the DB
 
