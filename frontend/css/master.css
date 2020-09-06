@@ -153,4 +153,26 @@ input[type="submit"] {
   border-width: 0;
 }
 
+.post {
+  margin: 5em 1em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.infos_post {
+  width: 30%;
+}
+
+.infos_post img {
+  border-radius: 50%;
+}
+
+.post_text {
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 3em;
+  padding: 3em;
+  border-radius: 0 5em 5em 5em;
+  width: 70%;
+}
+
 /*# sourceMappingURL=master.css.map */
