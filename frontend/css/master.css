@@ -148,6 +148,7 @@ header {
   padding: 2em;
   display: flex;
   background-color: white;
+  opacity: .9;
 }
 
 .logo {
@@ -179,7 +180,7 @@ header {
 
 @media (min-width: 1024px) {
   .boxForm {
-    min-width: 35%;
+    width: 26em;
     margin: 6em 3em 3em 3em;
   }
 }

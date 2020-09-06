@@ -52,7 +52,7 @@
               </div>
               <div class="line">
                 <!--<p><label for="email">email :</label></p>-->
-                <p><input type="email" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="newEmail" /></p>
+                <p><input type="email" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="newEmail"/></p>
 
               </div>
               <div class="line">
@@ -71,10 +71,10 @@
 
               </div>
               <div class="line">
-                <p v-on:click="signup = 1" class="a">Vous connectez</p>
+                <input class="button" type="submit" value="Inscription"/>
               </div>
               <div class="line">
-                <input class="button" type="submit" value="Inscription" />
+                <p v-on:click="signup = 1" class="a">Vous connectez</p>
               </div>
             </form>
 
@@ -91,7 +91,7 @@
       const app = new Vue({
         el: "#app",
         data: {
-          message: "Vous n'avez pas encore de compte ? Créez-en un !",
+          message: 'Vous n\'avez pas encore de compte ? Créez-en un !',
           signup: 1,
           email: '',
           password: '',
@@ -99,24 +99,25 @@
           newUserName: '',
           newPassword: '',
         },
+        methods: {
+          submitSignup() {
+            axios.post('http://localhost:3000/signup', {
+              email: this.newEmail,
+              username: this.newUserName,
+              password: this.newPassword
+            });
+            this.signup = 1,
+            this.message = 'Vous pouvez vous connecter avec votre e-mail' + this.newEmail + ' et votre mot de passe que vous venez de choisir. Ou vous pouvez créer un nouveau compte en cliquant ici.'
+          }
+        },
         //methods: {
-        //  submitSignup() {
-        //    axios.post('http://localhost:3000/signup', {
-        //      email: this.newEmail,
-        //      username: this.newUserName,
-        //      password: this.newPassword
+        //  submitLogin() {
+        //    axios.post('http://localhost:3000/login', {
+        //      email: this.email,
+        //      password: this.password
         //    });
         //  }
         //},
-        methods: {
-          submitLogin() {
-            axios.post('http://localhost:3000/login', {
-              email: this.email,
-              password: this.password
-            });
-          }
-
-        },
 
       });
     </script>
