@@ -64,6 +64,12 @@ h1 {
   color: #fd2d01;
 }
 
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3em;
+  }
+}
+
 h2 {
   font-family: "nevis-FontZillion";
   font-size: 7em;
@@ -84,8 +90,28 @@ h3 {
   font-weight: bold;
 }
 
+@media (min-width: 1024px) {
+  h3 {
+    font-size: 2em;
+  }
+}
+
+h4 {
+  font-size: 2em;
+}
+
+h4 span {
+  font-size: .8em;
+}
+
 p {
   font-size: 2.5em;
+}
+
+@media (min-width: 1024px) {
+  p {
+    font-size: 1em;
+  }
 }
 
 a, .a {
@@ -104,6 +130,20 @@ body {
   background-repeat: no-repeat;
 }
 
+@media (min-width: 1024px) {
+  body {
+    background-image: url("../pictures/wallpaper_desk.jpg");
+  }
+}
+
+@media (min-width: 1024px) {
+  .page {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+  }
+}
+
 header {
   padding: 2em;
   display: flex;
@@ -115,14 +155,33 @@ header {
   height: 10%;
 }
 
+@media (min-width: 1024px) {
+  .logo {
+    width: 3.6em;
+  }
+}
+
 .slogan {
   margin: 4em 0 0 5em;
+}
+
+@media (min-width: 1024px) {
+  .slogan {
+    margin: 18em 0 0 5em;
+  }
 }
 
 .boxForm {
   padding: 0.5em;
   margin: 15em 3em 3em 3em;
   background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media (min-width: 1024px) {
+  .boxForm {
+    min-width: 35%;
+    margin: 6em 3em 3em 3em;
+  }
 }
 
 input {
@@ -153,26 +212,40 @@ input[type="submit"] {
   border-width: 0;
 }
 
+@media (min-width: 1024px) {
+  input[type="submit"] {
+    font-size: 1.2em;
+  }
+}
+
 .post {
   margin: 5em 1em;
   display: flex;
   justify-content: space-around;
 }
 
-.infos_post {
+.user_post {
   width: 30%;
 }
 
-.infos_post img {
+.user_post img {
   border-radius: 50%;
 }
 
 .post_text {
-  background-color: rgba(255, 255, 255, 0.8);
   margin: 3em;
-  padding: 3em;
-  border-radius: 0 5em 5em 5em;
   width: 70%;
+}
+
+.bubble {
+  padding: 3em;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0 5em 5em 5em;
+}
+
+.username {
+  text-align: center;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=master.css.map */

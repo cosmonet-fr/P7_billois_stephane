@@ -21,6 +21,9 @@ h1 {
   font-family: "nevis-FontZillion";
   font-size: 5em;
   color: $color1;
+  @media (min-width: 1024px) {
+    font-size: 3em;
+  }
 }
 h2 {
   font-family: "nevis-FontZillion";
@@ -37,9 +40,23 @@ h2 {
 h3 {
   font-size: 4em;
   font-weight: bold;
+  @media (min-width: 1024px) {
+    font-size: 2em;
+  }
+
+}
+h4 {
+  font-size: 2em;
+  span {
+    font-size: .8em;
+  }
 }
 p {
   font-size: 2.5em;
+  @media (min-width: 1024px) {
+    font-size: 1em;
+  }
+
 }
 
 a, .a {
@@ -55,6 +72,16 @@ body {
   background-image: url("../pictures/wallpaper_gsm.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  @media (min-width: 1024px) {
+    background-image: url("../pictures/wallpaper_desk.jpg");
+  }
+}
+.page {
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+  }
 }
 header {
   padding: 2em;
@@ -65,16 +92,27 @@ header {
 .logo {
   width: 10%;
   height: 10%;
+  @media (min-width: 1024px) {
+    width: 3.6em;
+
+  }
 }
 
 .slogan {
   margin: 4em 0 0 5em;
+  @media (min-width: 1024px) {
+    margin: 18em 0 0 5em;
+  }
 }
 
 .boxForm {
   padding: 0.5em;
   margin: 15em 3em 3em 3em;
   background-color: $backgrounColor2;
+  @media (min-width: 1024px) {
+    min-width: 35%;
+    margin: 6em 3em 3em 3em;
+  }
 }
 
 input {
@@ -103,6 +141,9 @@ input[type="submit"]{
   font-size: 2em;
   background-color: $colorBtn;
   border-width: 0;
+  @media (min-width: 1024px) {
+    font-size: 1.2em;
+  }
 }
 
 ////////////////////////////////
@@ -111,17 +152,23 @@ input[type="submit"]{
   display: flex;
   justify-content: space-around;
 }
-.infos_post {
+.user_post {
   width: 30%;
   img {
     border-radius: 50%;
   }
 }
 .post_text {
-  background-color: rgba(255, 255, 255, 0.8);
   margin: 3em;
-  padding: 3em;
-  border-radius: 0 5em 5em 5em;
   width: 70%;
 
+}
+.bubble {
+  padding: 3em;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 0 5em 5em 5em;
+}
+.username {
+  text-align: center;
+  font-weight: bold;
 }
