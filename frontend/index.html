@@ -17,13 +17,13 @@
     <div id="app">
       <section v-if="signup > 0">
         <article class="boxForm">
-          <form id="login" @submit.prevent="submitLogin">
+          <form id="login" >
             <div class="line">
               <h3>Connexion</h3>
             </div>
             <div class="line">
               <!--<p><label for="email">email :</label></p>-->
-              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="email" /></p>
+              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255"/></p>
 
             </div>
             <div class="line">
@@ -94,7 +94,6 @@
           newEmail: '',
           newUserName: '',
           newPassword: '',
-
         },
         methods: {
           submitSignup() {
@@ -107,16 +106,7 @@
 
           }
         },
-        methods: {
-          submitLogin() {
-            console.log(this.email, this.password);
-            axios.post('http://localhost:3000/login', {
-              email: this.email,
-              password: this.password
-            });
 
-          }
-        },
       });
     </script>
     <!--<script src="signup.js" charset="utf-8"></script>-->
