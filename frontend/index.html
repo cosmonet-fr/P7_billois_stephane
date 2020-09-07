@@ -23,12 +23,12 @@
             </div>
             <div class="line">
               <!--<p><label for="email">email :</label></p>-->
-              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="newEmail"/></p>
+              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" required v-model="newEmail"/></p>
 
             </div>
             <div class="line">
               <!--<p><label for="password">mot de passe :</label></p>-->
-              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" v-model="newPassword"/></p>
+              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" required v-model="newPassword"/></p>
 
             </div>
             <div class="line">
@@ -51,23 +51,26 @@
             </div>
             <div class="line">
               <!--<p><label for="email">email :</label></p>-->
-              <p><input type="email" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="newEmail"/></p>
+              <p><input type="email" name="email" id="email" placeholder="Email" size="25" maxlength="255" required v-model="newEmail"/></p>
 
             </div>
             <div class="line">
               <!--<p><label for="email">email :</label></p>-->
-              <p><input type="text" name="email" id="email" placeholder="Votre nom d'utilisateur" size="25" maxlength="255" v-model="newUserName" /></p>
+              <p><input type="text" name="email" id="email" placeholder="Votre nom d'utilisateur" size="25" required maxlength="255" v-model="newUserName" /></p>
 
             </div>
             <div class="line">
               <!--<p><label for="password">mot de passe :</label></p>-->
-              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" v-model="newPassword" /></p>
+              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" required maxlength="255" v-model="newPassword" /></p>
 
             </div>
             <div class="line">
               <!--<p><label for="password">mot de passe :</label></p>-->
-              <p><input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmez votre mot de passe" size="25" maxlength="255" /></p>
+              <p><input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmez votre mot de passe" size="25" required maxlength="255" v-model="confirmPassword" /></p>
 
+            </div>
+            <div class="line">
+              <p class="error" v-if="this.newPassword !== this.confirmPassword" >Vos deux mot de passes ne sont pas identiques !</p>
             </div>
             <div class="line">
               <input class="button" type="submit" value="Inscription"/>
@@ -84,6 +87,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.20/jsrsasign-all-min.js"></script> <!-- Pour JWT-->
     <script>
     //console.log(Vue);
       const app = new Vue({
@@ -96,6 +100,7 @@
           newEmail: '',
           newUserName: '',
           newPassword: '',
+          confirmPassword: '',
         },
         methods: {
           submitSignup() {
@@ -104,8 +109,8 @@
               username: this.newUserName,
               password: this.newPassword
             });
-            this.route = 'login',
-            this.message = 'Vous pouvez vous connecter avec votre e-mail' + this.newEmail + ' et votre mot de passe que vous venez de choisir. Ou vous pouvez créer un nouveau compte en cliquant ici.'
+            this.route = 'login'
+            //this.message = 'Vous pouvez vous connecter avec votre e-mail' + this.newEmail + ' et votre mot de passe que vous venez de choisir. Ou vous pouvez créer un nouveau compte en cliquant ici.'
           }
         },
 

@@ -5,6 +5,7 @@ $colorBtn: #3498db;
 $backgrounColor1: white;
 $backgrounColor2: rgba(255, 255, 255, .8);
 $backgroundTransparent: rgba(255, 255, 255, 0);
+$errorColor: red;
 @font-face {
     font-family: 'nevis-FontZillion';
     src: url('../fonts/nevis-FontZillion/Fonts/nevis.ttf') format('truetype');
@@ -74,6 +75,10 @@ a, .a {
   &:hover{
     text-decoration: none;
   }
+}
+
+.error {
+  color: $errorColor;
 }
 
 body {

@@ -136,6 +136,10 @@ a:hover, .a:hover {
   text-decoration: none;
 }
 
+.error {
+  color: red;
+}
+
 body {
   background-image: url("../pictures/wallpaper_gsm.jpg");
   background-size: cover;
