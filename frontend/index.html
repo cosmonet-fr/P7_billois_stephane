@@ -15,24 +15,24 @@
         <h2>Social<br /><span>Network</span></h2>
 
       </div>
-      <section v-if="signup > 0">
+      <section v-if="route === 'login'">
         <article class="boxForm">
-          <form id="login" action="app.html" method="post" @submit="submitLogin">
+          <form id="login" action="app.html" method="post" @submit.prevent="submitSignup">
             <div class="line">
               <h3>Connexion</h3>
             </div>
             <div class="line">
               <!--<p><label for="email">email :</label></p>-->
-              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="email"/></p>
+              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="newEmail"/></p>
 
             </div>
             <div class="line">
               <!--<p><label for="password">mot de passe :</label></p>-->
-              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" v-model="password"/></p>
+              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" v-model="newPassword"/></p>
 
             </div>
             <div class="line">
-              <p v-on:click="signup = 0" class="a">{{ message }}</p>
+              <p v-on:click="route = 'signup'" class="a">{{ message }}</p>
             </div>
             <div class="line">
               <input class="button" type="submit" value="Envoyer" />
@@ -43,7 +43,7 @@
       </section>
 
       <!--Signup-->
-      <section id="test" v-if="signup < 1">
+      <section v-if="route === 'signup'">
         <article class="boxForm">
           <form id="signup" @submit.prevent="submitSignup">
             <div class="line">
@@ -73,7 +73,7 @@
               <input class="button" type="submit" value="Inscription"/>
             </div>
             <div class="line">
-              <p v-on:click="signup = 1" class="a">Vous connectez</p>
+              <p v-on:click="route = 'login'" class="a">Vous connectez</p>
             </div>
           </form>
 
@@ -90,7 +90,7 @@
         el: "#app",
         data: {
           message: 'Vous n\'avez pas encore de compte ? Créez-en un !',
-          signup: 1,
+          route: 'login',
           email: '',
           password: '',
           newEmail: '',
@@ -99,27 +99,18 @@
         },
         methods: {
           submitSignup() {
-            axios.post('http://localhost:3000/signup', {
+            axios.post('http://localhost:3000/' + this.route, {
               email: this.newEmail,
               username: this.newUserName,
               password: this.newPassword
             });
-            this.signup = 1,
+            this.route = 'login',
             this.message = 'Vous pouvez vous connecter avec votre e-mail' + this.newEmail + ' et votre mot de passe que vous venez de choisir. Ou vous pouvez créer un nouveau compte en cliquant ici.'
           }
         },
-        //methods: {
-        //  submitLogin() {
-        //    axios.post('http://localhost:3000/login', {
-        //      email: this.email,
-        //      password: this.password
-        //    });
-        //  }
-        //},
 
       });
-      const test = new Vue({ el: "#test", data: { message: '000',} });
+
     </script>
-    <!--<script src="signup.js" charset="utf-8"></script>-->
   </body>
 </html>
