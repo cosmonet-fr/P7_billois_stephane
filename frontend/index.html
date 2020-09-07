@@ -10,77 +10,75 @@
       <img class="logo" src="pictures/logos/icon.svg" alt="Logo Groupomania">
       <h1>Groupomania</h1>
     </header>
-    <div class="page">
+    <div id="app" class="page">
       <div class="slogan">
-        <h2>Social <span>Network</span></h2>
+        <h2>Social<br /><span>Network</span></h2>
 
       </div>
-      <div id="app">
-        <section v-if="signup > 0">
-          <article class="boxForm">
-            <form id="login" action="app.html" method="post" @submit="submitLogin">
-              <div class="line">
-                <h3>Connexion</h3>
-              </div>
-              <div class="line">
-                <!--<p><label for="email">email :</label></p>-->
-                <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="email"/></p>
+      <section v-if="signup > 0">
+        <article class="boxForm">
+          <form id="login" action="app.html" method="post" @submit="submitLogin">
+            <div class="line">
+              <h3>Connexion</h3>
+            </div>
+            <div class="line">
+              <!--<p><label for="email">email :</label></p>-->
+              <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="email"/></p>
 
-              </div>
-              <div class="line">
-                <!--<p><label for="password">mot de passe :</label></p>-->
-                <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" v-model="password"/></p>
+            </div>
+            <div class="line">
+              <!--<p><label for="password">mot de passe :</label></p>-->
+              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" v-model="password"/></p>
 
-              </div>
-              <div class="line">
-                <p v-on:click="signup = 0" class="a">{{ message }}</p>
-              </div>
-              <div class="line">
-                <input class="button" type="submit" value="Envoyer" />
-              </div>
-            </form>
+            </div>
+            <div class="line">
+              <p v-on:click="signup = 0" class="a">{{ message }}</p>
+            </div>
+            <div class="line">
+              <input class="button" type="submit" value="Envoyer" />
+            </div>
+          </form>
 
-          </article>
-        </section>
+        </article>
+      </section>
 
-        <!--Signup-->
-        <section v-if="signup < 1">
-          <article class="boxForm">
-            <form id="signup" @submit.prevent="submitSignup">
-              <div class="line">
-                <h3>Créez un compte</h3>
-              </div>
-              <div class="line">
-                <!--<p><label for="email">email :</label></p>-->
-                <p><input type="email" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="newEmail"/></p>
+      <!--Signup-->
+      <section id="test" v-if="signup < 1">
+        <article class="boxForm">
+          <form id="signup" @submit.prevent="submitSignup">
+            <div class="line">
+              <h3>Créez un compte</h3>
+            </div>
+            <div class="line">
+              <!--<p><label for="email">email :</label></p>-->
+              <p><input type="email" name="email" id="email" placeholder="Email" size="25" maxlength="255" v-model="newEmail"/></p>
 
-              </div>
-              <div class="line">
-                <!--<p><label for="email">email :</label></p>-->
-                <p><input type="text" name="email" id="email" placeholder="Votre nom d'utilisateur" size="25" maxlength="255" v-model="newUserName" /></p>
+            </div>
+            <div class="line">
+              <!--<p><label for="email">email :</label></p>-->
+              <p><input type="text" name="email" id="email" placeholder="Votre nom d'utilisateur" size="25" maxlength="255" v-model="newUserName" /></p>
 
-              </div>
-              <div class="line">
-                <!--<p><label for="password">mot de passe :</label></p>-->
-                <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" v-model="newPassword" /></p>
+            </div>
+            <div class="line">
+              <!--<p><label for="password">mot de passe :</label></p>-->
+              <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" v-model="newPassword" /></p>
 
-              </div>
-              <div class="line">
-                <!--<p><label for="password">mot de passe :</label></p>-->
-                <p><input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmez votre mot de passe" size="25" maxlength="255" /></p>
+            </div>
+            <div class="line">
+              <!--<p><label for="password">mot de passe :</label></p>-->
+              <p><input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmez votre mot de passe" size="25" maxlength="255" /></p>
 
-              </div>
-              <div class="line">
-                <input class="button" type="submit" value="Inscription"/>
-              </div>
-              <div class="line">
-                <p v-on:click="signup = 1" class="a">Vous connectez</p>
-              </div>
-            </form>
+            </div>
+            <div class="line">
+              <input class="button" type="submit" value="Inscription"/>
+            </div>
+            <div class="line">
+              <p v-on:click="signup = 1" class="a">Vous connectez</p>
+            </div>
+          </form>
 
-          </article>
-        </section>
-      </div>
+        </article>
+      </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -120,6 +118,7 @@
         //},
 
       });
+      const test = new Vue({ el: "#test", data: { message: '000',} });
     </script>
     <!--<script src="signup.js" charset="utf-8"></script>-->
   </body>
