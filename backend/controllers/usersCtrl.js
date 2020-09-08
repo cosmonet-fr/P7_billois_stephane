@@ -73,6 +73,7 @@ if (login === null) {
         // Il faut ajouter l'id de l'utilisateur dans le TOKEN
         console.table(login.id);
         var token = jwt.sign({ userId: login.id }, 'RANDOM_TOKEN_SECRET', { expiresIn: '3h' });
+        console.log(token);
         return res.status(200).json({ token: token });
 
       }
