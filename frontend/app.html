@@ -11,20 +11,31 @@
       <h1 class="logo_gsm">G<span>S</span>N</h1>
       <h1 class="logo_desk" >Groupomania <span>Social </span>Network</h1>
     </header>
+
     <div id="app">
 
-      <div class="post" v-for="message in messages" :key="message.content">
-        <div class="user_post">
-          <img src="pictures/default_avatar.jpg" alt="avatar">
-          <p class="username">{User}</p>
-        </div>
-        <div class="post_text">
-          <h4>{{ message.title }} | <span>{{ message.updatedAt }}</span></h4>
-          <div class="bubble">
-            <p>{{ message.content }}</p>
+      <div class="newPost">
+        <form id="signup" @submit.prevent="addNewPost">
+          <input type="textarea" name="" value="" placeholder="Nouveau message" >
+        </form>
+      </div>
+
+      <div class="allPosts">
+        <div class="post" v-for="message in messages" :key="message.content">
+          <div class="user_post">
+            <img src="pictures/default_avatar.jpg" alt="avatar">
+            <p class="username">{{message.user_id}}</p>
+          </div>
+          <div class="post_text">
+            <h4>{{ message.title }} | <span>{{ message.updatedAt }}</span></h4>
+            <div class="bubble">
+              <p>{{ message.content }}</p>
+            </div>
           </div>
         </div>
       </div>
+
+
 
 
     </div>
@@ -42,6 +53,7 @@
           axios.get('http://localhost:3000/message/public_wall/')
           .then(response => (this.messages = response.data))
         }
+        
       })
 
     </script>

@@ -235,6 +235,12 @@ input[type="submit"] {
   display: none;
 }
 
+.allPosts {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+}
+
 .post {
   margin: 5em 1em;
   display: flex;
@@ -263,6 +269,15 @@ input[type="submit"] {
 .username {
   text-align: center;
   font-weight: bold;
+}
+
+.newPost input {
+  font-size: 2em;
+  margin: 1em;
+  border: none;
+  background: #fff;
+  border-radius: 1em 0;
+  width: 90%;
 }
 
 /*# sourceMappingURL=master.css.map */
