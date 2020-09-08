@@ -6,25 +6,25 @@
     <title></title>
   </head>
   <body>
-    <header>
+    <header class="app">
       <img class="logo" src="pictures/logos/icon.svg" alt="Logo Groupomania">
-      <h1>Groupomania</h1>
+      <h1 class="logo_gsm">G<span>S</span>N</h1>
+      <h1 class="logo_desk" >Groupomania <span>Social </span>Network</h1>
     </header>
     <div id="app">
-      
-      <div class="post">
+
+      <div class="post" v-for="message in messages" :key="message.content">
         <div class="user_post">
           <img src="pictures/default_avatar.jpg" alt="avatar">
           <p class="username">{User}</p>
         </div>
         <div class="post_text">
-          <h4>{{ info[0].title }} | <span>{{ info[0].updatedAt }}</span></h4>
+          <h4>{{ message.title }} | <span>{{ message.updatedAt }}</span></h4>
           <div class="bubble">
-            <p>{{ info[0].content }}</p>
+            <p>{{ message.content }}</p>
           </div>
         </div>
       </div>
-
 
 
     </div>
@@ -34,14 +34,13 @@
     <script>
       new Vue({
         el: '#app',
-        data () {
-          return {
-            info: null
-          }
+        data: {
+          messages: []
         },
         mounted () {
+          //axios.defaults.headers.common['Authorization'] = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTU5OTU1MjkyNCwiZXhwIjoxNTk5NTYzNzI0fQ.qw1YkO7CfePCpCSZabzHDNO65ImwmpbzLxB-BbWQPgc};
           axios.get('http://localhost:3000/message/public_wall/')
-          .then(response => (this.info = response.data))
+          .then(response => (this.messages = response.data))
         }
       })
 

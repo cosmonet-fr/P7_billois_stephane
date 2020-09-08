@@ -64,6 +64,10 @@ h1 {
   color: #fd2d01;
 }
 
+h1 span {
+  color: black;
+}
+
 @media (min-width: 1280px) {
   h1 {
     font-size: 3em;
@@ -141,15 +145,7 @@ a:hover, .a:hover {
 }
 
 body {
-  background-image: url("../pictures/wallpaper_gsm.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-@media (min-width: 1280px) {
-  body {
-    background-image: url("../pictures/wallpaper_desk.jpg");
-  }
+  background-color: #eee;
 }
 
 @media (min-width: 1280px) {
@@ -233,6 +229,10 @@ input[type="submit"] {
   input[type="submit"] {
     font-size: 1.2em;
   }
+}
+
+.logo_desk {
+  display: none;
 }
 
 .post {

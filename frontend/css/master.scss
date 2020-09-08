@@ -4,6 +4,7 @@ $color2: #040404;
 $colorBtn: #3498db;
 $backgrounColor1: white;
 $backgrounColor2: rgba(255, 255, 255, .8);
+$backgrounColor3: #eee;
 $backgroundTransparent: rgba(255, 255, 255, 0);
 $errorColor: red;
 @font-face {
@@ -22,6 +23,9 @@ h1 {
   font-family: "nevis-FontZillion";
   font-size: 5em;
   color: $color1;
+  span {
+    color: black;
+  }
   @media (min-width: 1280px) {
     font-size: 3em;
   }
@@ -82,12 +86,7 @@ a, .a {
 }
 
 body {
-  background-image: url("../pictures/wallpaper_gsm.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  @media (min-width: 1280px) {
-    background-image: url("../pictures/wallpaper_desk.jpg");
-  }
+  background-color: $backgrounColor3;
 }
 .page {
   @media (min-width: 1280px) {
@@ -161,6 +160,10 @@ input[type="submit"]{
 }
 
 ////////////////////////////////
+.logo_desk {
+  display: none;
+}
+
 .post {
   margin: 5em 1em;
   display: flex;
