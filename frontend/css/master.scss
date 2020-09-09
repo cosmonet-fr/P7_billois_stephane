@@ -216,6 +216,25 @@ input[type="submit"]{
     height: 50%;
   }
 }
-.wall_of_box {
+
+//////////////////////////////
+.profile, .wall_of_box  {
   background-color: $backgrounColor1;
+  margin: 5em 3em;
+  padding: 3em;
+  border-radius: 3em;
+  h4 {
+    font-size: 3em;
+    margin: 0 0 2em 0;
+    font-weight: bold;
+  }
+}
+.profile_head {
+  text-align: center;
+  img { // A obtimiser
+    margin: 4em;
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+  }
 }
