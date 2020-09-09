@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/master.css">
+    <title></title>
+  </head>
+  <body>
+    <header class="app">
+      <img class="logo" src="pictures/logos/icon.svg" alt="Logo Groupomania">
+      <h1 class="logo_gsm">G<span>S</span>N</h1>
+      <h1 class="logo_desk" >Groupomania <span>Social </span>Network</h1>
+    </header>
+
+    <div id="app">
+
+      <div class="newPost">
+        <form id="newPost" @submit.prevent="editProfile">
+          <div class="newPostText">
+            <!--<input type="file" name="avatar" v-model="avatar">-->
+            <input type="password" name="password" placeholder="E-mail" required v-model="password">
+            <input type="password" name="newPassword" placeholder="Nom ou pseudo" required v-model="newPassword">
+          </div>
+          <input class="button" type="submit" value="Envoyer" />
+        </form>
+      </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          password: '',
+          newPassword: '',
+          myUser: 2, // utiliser l'id du token
+        },
+        methods: {
+          editProfile() {
+            console.log('go');
+            axios.put('http://localhost:3000/new_passwd/' + this.myUser, {
+              //avatar: this.avatar,
+              password: this.password,
+              newPassword: this.newPassword
+            })
+
+          }
+        },
+
+      })
+
+    </script>
+  </body>
+</html>
