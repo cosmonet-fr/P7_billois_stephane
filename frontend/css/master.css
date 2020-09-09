@@ -315,4 +315,17 @@ input[type="submit"] {
   height: 50%;
 }
 
+.listBox {
+  margin: 2em;
+  padding: 2em;
+  border-radius: 3em;
+  background-color: white;
+}
+
+.list {
+  display: flex;
+  justify-content: space-around;
+  margin: 5em 0;
+}
+
 /*# sourceMappingURL=master.css.map */

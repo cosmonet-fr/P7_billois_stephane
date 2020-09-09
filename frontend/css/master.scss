@@ -218,7 +218,7 @@ input[type="submit"]{
 }
 
 //////////////////////////////
-.profile, .wall_of_box  {
+.profile, .wall_of_box, {
   background-color: $backgrounColor1;
   margin: 5em 3em;
   padding: 3em;
@@ -237,4 +237,17 @@ input[type="submit"]{
     width: 50%;
     height: 50%;
   }
+}
+
+//////////////////////////////:
+.listBox {
+  margin: 2em;
+  padding: 2em;
+  border-radius: 3em;
+  background-color: $backgrounColor1;
+}
+.list {
+  display: flex;
+  justify-content: space-around;
+  margin: 5em 0;
 }
