@@ -205,3 +205,17 @@ input[type="submit"]{
 
   }
 }
+
+///////////////////////////////:
+.wall_of {
+  text-align: center;
+  img {
+    margin: 4em;
+    border-radius: 50%;
+    width: 50%;
+    height: 50%;
+  }
+}
+.wall_of_box {
+  background-color: $backgrounColor1;
+}
