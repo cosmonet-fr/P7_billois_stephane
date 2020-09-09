@@ -271,7 +271,7 @@ input[type="submit"] {
   font-weight: bold;
 }
 
-.newPost input {
+.newPostText input {
   font-size: 2em;
   margin: 1em;
   border: none;

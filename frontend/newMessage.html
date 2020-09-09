@@ -23,24 +23,8 @@
           <input class="button" type="submit" value="Envoyer" />
         </form>
       </div>
-
-      <div class="allPosts">
-        <div class="post" v-for="message in messages" :key="message.content">
-          <div class="user_post">
-            <img src="pictures/default_avatar.jpg" alt="avatar">
-            <p class="username">{{message.user_id}}</p>
-          </div>
-          <div class="post_text">
-            <h4>{{ message.title }} | <span>{{ message.updatedAt }}</span></h4>
-            <div class="bubble">
-              <p>{{ message.content }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
+      <p>{{title}}</p>
+      <p>{{message}}</p>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -50,13 +34,19 @@
       new Vue({
         el: '#app',
         data: {
-          messages: []
+          title: '',
+          message: '',
         },
-        mounted () {
-          //axios.defaults.headers.common['Authorization'] = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTU5OTU1MjkyNCwiZXhwIjoxNTk5NTYzNzI0fQ.qw1YkO7CfePCpCSZabzHDNO65ImwmpbzLxB-BbWQPgc};
-          axios.get('http://localhost:3000/message/public_wall/')
-          .then(response => (this.messages = response.data))
-        }
+        methods: {
+          submitPost() {
+            console.log('go');
+            axios.post('http://localhost:3000/message/new/2', {
+              title: this.title,
+              message: this.message
+            })
+
+          }
+        },
 
       })
 
