@@ -23,8 +23,6 @@
           <input class="button" type="submit" value="Envoyer" />
         </form>
       </div>
-      <p>{{title}}</p>
-      <p>{{message}}</p>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -36,11 +34,12 @@
         data: {
           title: '',
           message: '',
+          myUser: 2,
         },
         methods: {
           submitPost() {
             console.log('go');
-            axios.post('http://localhost:3000/message/new/2', {
+            axios.post('http://localhost:3000/message/new/' + this.myUser, {
               title: this.title,
               message: this.message
             })
