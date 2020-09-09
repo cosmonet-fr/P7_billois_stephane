@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/master.css">
+    <title></title>
+  </head>
+  <body>
+    <header class="app">
+      <img class="logo" src="pictures/logos/icon.svg" alt="Logo Groupomania">
+      <h1 class="logo_gsm">G<span>S</span>N</h1>
+      <h1 class="logo_desk" >Groupomania <span>Social </span>Network</h1>
+    </header>
+
+    <div id="app">
+
+      <div class="allPosts">
+        <div class="post">
+          <div class="user_post">
+            <img src="pictures/default_avatar.jpg" alt="avatar">
+            <p class="username">{{message.user_id}}</p>
+          </div>
+          <div class="post_text">
+            <h4>{{ message.title }} | <span>{{ message.updatedAt }}</span></h4>
+            <div class="bubble">
+              <p>{{ message.content }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          message: [],
+          post: 2 // utiliser l'id des params de l'url
+        },
+        mounted () {
+          //axios.defaults.headers.common['Authorization'] = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTU5OTU1MjkyNCwiZXhwIjoxNTk5NTYzNzI0fQ.qw1YkO7CfePCpCSZabzHDNO65ImwmpbzLxB-BbWQPgc};
+          axios.get('http://localhost:3000/message/post/' + this.post)
+          .then(response => (this.message = response.data))
+        }
+
+      })
+
+    </script>
+  </body>
+</html>
