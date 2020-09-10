@@ -1,6 +1,6 @@
 <template>
   <div id="wall" class="wall">
-    
+
     <div class="allPosts">
       <div class="post" v-for="message in messages" :key="message.content">
         <div class="user_post">
@@ -19,7 +19,7 @@
   </div>
 </template>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script>
 //import Wall from '@/components/public_wall.vue'
 
@@ -28,34 +28,15 @@ export default {
   data: function () {
     return {
       token: null,
-      messages: [
-        {
-          id: 1,
-          user_id: 2,
-          title: "Coucou",
-          content: "Coucou la companie ! Voici mon 1er message !",
-          attachement: "",
-          likes: null,
-          createdAt: "2020-09-06T12:05:17.000Z",
-          updatedAt: "2020-09-06T12:05:17.000Z",
-          parent_id: null
-        },
-        {
-          id: 2,
-          user_id: 7,
-          title: "Salut",
-          content: "Salut !",
-          attachement: "",
-          likes: null,
-          createdAt: "2020-09-06T12:05:17.000Z",
-          updatedAt: "2020-09-06T12:05:17.000Z",
-          parent_id: null
-        }
-      ],
+      messages: [],
     }
   },
   mounted () {
+    const axios = require('axios');
     this.token = localStorage.getItem('token');
+    axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
+    axios.get('http://localhost:3000/message/public_wall/')
+    .then(response => (this.messages = response.data))
   }
 
 }
