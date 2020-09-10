@@ -18,8 +18,9 @@
         <form id="newPost" @submit.prevent="editProfile">
           <div class="newPostText">
             <!--<input type="file" name="avatar" v-model="avatar">-->
-            <input type="password" name="password" placeholder="E-mail" required v-model="password">
-            <input type="password" name="newPassword" placeholder="Nom ou pseudo" required v-model="newPassword">
+            <input type="password" name="password" placeholder="Votre mot de passe actuel" required v-model="password">
+            <input type="password" name="newPassword" placeholder="Votre nouveau mot de passe" required v-model="newPassword">
+            <input type="password" name="newPassword" placeholder="Confirmez votre nouveau mot de passe" required >
           </div>
           <input class="button" type="submit" value="Envoyer" />
         </form>

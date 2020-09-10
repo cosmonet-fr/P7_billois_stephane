@@ -13,7 +13,10 @@
     </header>
 
     <div id="app">
+      <div id="test">
+        <p>ici : <button-counter>ggg</button-counter></p>
 
+      </div>
       <div class="newPost">
         <form id="newPost" @submit.prevent="submitPost">
           <div class="newPostText">
@@ -27,7 +30,7 @@
       <div class="allPosts">
         <div class="post" v-for="message in messages" :key="message.content">
           <div class="user_post">
-            <img src="pictures/default_avatar.jpg" alt="avatar">
+            <img src="pictures/default_avatar.svg" alt="avatar">
             <p class="username">{{message.user_id}}</p>
           </div>
           <div class="post_text">
@@ -43,6 +46,7 @@
 
 
     </div>
+    <script src="components/get_user.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -50,15 +54,18 @@
       new Vue({
         el: '#app',
         data: {
-          messages: []
+          messages: [],
+          token: ''
         },
         mounted () {
-          //axios.defaults.headers.common['Authorization'] = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTU5OTU1MjkyNCwiZXhwIjoxNTk5NTYzNzI0fQ.qw1YkO7CfePCpCSZabzHDNO65ImwmpbzLxB-BbWQPgc};
+          this.token = localStorage.getItem('token');
+          axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
           axios.get('http://localhost:3000/message/public_wall/')
           .then(response => (this.messages = response.data))
         }
 
       })
+      new Vue({ el: '#test' })
 
     </script>
   </body>
