@@ -22,13 +22,19 @@ const routes = [
     path: '/wall',
     name: 'Wall',
     component: () => import('../views/Wall.vue')
-  }
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: () => import('../views/User.vue')
+  },
+  //{ path: '/wall/:id', component: () => import('../views/Wall.vue') }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router
