@@ -56,10 +56,10 @@ export default {
 
 <style scoped lang="scss">
 .profile {
-  background-color: #fff;
-  margin: .5em;
-  padding: .5em;
-  border-radius: 3em;
+  background-color: #ffffffdd;
+  margin: 3em 0 -3em 0;
+  padding: 1.5em;
+  border-radius: 3em 3em 0 0;
   h4 {
     font-size: 3em;
     margin: 0;
@@ -77,9 +77,10 @@ export default {
 }
 
 .wall_of_box {
-  background-color: #fff;
+  background-color: #ffffffdd;
   margin: 3em 0;
   padding: 2em;
+  border-radius: 0 0 3em 3em;
 }
 
 </style>

@@ -44,14 +44,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$color1: #fd2d01;
-$color2: #040404;
-$colorBtn: #3498db;
 $backgrounColor1: white;
-$backgrounColor2: rgba(255, 255, 255, .8);
-$backgrounColor3: #eee;
-$backgroundTransparent: rgba(255, 255, 255, 0);
-$errorColor: red;
+
 .allPosts {
 display: flex;
 flex-direction: column-reverse;

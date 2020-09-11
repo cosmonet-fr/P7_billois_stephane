@@ -1,18 +1,127 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+    <div class="slogan">
+      <h2>Social<br /><span>Network</span></h2>
+    </div>
+
+    <section v-if="route === 'login'">
+      <article class="boxForm">
+        <form id="login" action="app.html" method="post" @submit.prevent="submitSignup">
+          <div class="line">
+            <h3>Connexion</h3>
+          </div>
+          <div class="line">
+            <!--<p><label for="email">email :</label></p>-->
+            <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" required v-model="email"/></p>
+
+          </div>
+          <div class="line">
+            <!--<p><label for="password">mot de passe :</label></p>-->
+            <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" required v-model="password"/></p>
+
+          </div>
+          <div class="line">
+            <p v-on:click="route = 'signup'" class="a">{{ message }}</p>
+          </div>
+          <div class="line">
+            <input class="button" type="submit" value="Envoyer" />
+          </div>
+        </form>
+
+      </article>
+    </section>
+
+    <!--Signup-->
+    <section v-if="route === 'signup'">
+      <article class="boxForm">
+        <form id="signup" @submit.prevent="submitSignup">
+          <div class="line">
+            <h3>Créez un compte</h3>
+          </div>
+          <div class="line">
+            <!--<p><label for="email">email :</label></p>-->
+            <p><input type="email" name="email" id="email" placeholder="Email" size="25" maxlength="255" required v-model="newEmail"/></p>
+
+          </div>
+          <div class="line">
+            <!--<p><label for="email">email :</label></p>-->
+            <p><input type="text" name="email" id="email" placeholder="Votre nom d'utilisateur" size="25" required maxlength="255" v-model="newUserName" /></p>
+
+          </div>
+          <div class="line">
+            <!--<p><label for="password">mot de passe :</label></p>-->
+            <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" required maxlength="255" v-model="newPassword" /></p>
+
+          </div>
+          <div class="line">
+            <!--<p><label for="password">mot de passe :</label></p>-->
+            <p><input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmez votre mot de passe" size="25" required maxlength="255" v-model="confirmPassword" /></p>
+
+          </div>
+          <div class="line">
+            <p class="error" v-if="this.newPassword !== this.confirmPassword" >Vos deux mot de passes ne sont pas identiques !</p>
+          </div>
+          <div class="line">
+            <input class="button" type="submit" value="Inscription"/>
+          </div>
+          <div class="line">
+            <p v-on:click="route = 'login'" class="a">Vous connectez</p>
+          </div>
+        </form>
+
+      </article>
+    </section>
+
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+  methods: {
+    submitSignup: function() {
+      const axios = require('axios');
+      if (this.route === 'login') {
+        axios.post('http://localhost:3000/' + this.route, {
+          email: this.email,
+          password: this.password
+        })
+        .then(function (res) {
+          console.log(res.data);
+          localStorage.setItem("token", res.data.token)
+        });
+
+      }else if (this.route === 'signup') {
+        axios.post('http://localhost:3000/' + this.route, {
+          email: this.newEmail,
+          username: this.newUserName,
+          password: this.newPassword
+        })
+        .then(function () {
+          console.log('Nouvelle utilisateur enregistré !');
+        });
+        this.route = 'login'
+        this.message = 'Vous pouvez vous connecter avec votre e-mail' + this.newEmail + ' et votre mot de passe que vous venez de choisir. Ou vous pouvez créer un nouveau compte en cliquant ici.'
+
+      }
+    }
+  },
+  data: function () {
+    return {
+      message: 'Vous n\'avez pas encore de compte ? Créez-en un !',
+      route: 'login',
+      email: '',
+      password: '',
+      newEmail: '',
+      newUserName: '',
+      newPassword: '',
+      confirmPassword: '',
+    }
+  },
+
+
 }
+
+
+
 </script>
