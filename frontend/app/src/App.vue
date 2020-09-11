@@ -5,10 +5,10 @@
         <img alt="Groupomania logo" src="./assets/icon.svg">
         <h1>Groupomania</h1>
       </header>
-      <router-link to="/">Home</router-link> |
+      <!--<router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/wall">Wall</router-link> |
-      <router-link to="/user">User</router-link>
+      <router-link to="/user">User</router-link>-->
     </div>
     <router-view/>
   </div>

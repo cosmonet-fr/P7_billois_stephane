@@ -27,6 +27,8 @@
 
 <script>
 //import Wall from '@/components/public_wall.vue'
+import VueJwtDecode from 'vue-jwt-decode'
+
 
 
 
@@ -36,17 +38,19 @@ export default {
       token: null,
       profile: [],
       messages: [],
+      myUser: null, // utiliser l'id du token
     }
   },
   mounted () {
     const axios = require('axios');
     this.token = localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
+    this.myUser = VueJwtDecode.decode(this.token);
 
-    axios.get('http://localhost:3000/users/2')
+    axios.get('http://localhost:3000/users/' + this.myUser.userId)
     .then(response => (this.profile = response.data))
 
-    axios.get('http://localhost:3000/message/wall_of/2')
+    axios.get('http://localhost:3000/message/wall_of/' + this.myUser.userId)
     .then(response => (this.messages = response.data))
   }
 
