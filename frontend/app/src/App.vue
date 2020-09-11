@@ -46,7 +46,7 @@ h1 {
 }
 h2 {
   font-family: "nevis-FontZillion";
-  font-size: 7em;
+  font-size: 3em;
   color: $backgrounColor1;
   font-weight: 400;
   @media (min-width: 1280px) {
@@ -61,7 +61,7 @@ h2 {
     font-weight: 100;
     color: $color1;
     position: relative;
-    top: -20px; right: -127px;
+    right: -40px;
   }
 }
 h3 {

@@ -80,6 +80,7 @@
 export default {
   methods: {
     submitSignup: function() {
+      const router = this.$router;
       const axios = require('axios');
       if (this.route === 'login') {
         axios.post('http://localhost:3000/' + this.route, {
@@ -88,7 +89,8 @@ export default {
         })
         .then(function (res) {
           console.log(res.data);
-          localStorage.setItem("token", res.data.token)
+          localStorage.setItem("token", res.data.token);
+          router.push("Wall")
         });
 
       }else if (this.route === 'signup') {
@@ -121,7 +123,57 @@ export default {
 
 
 }
-
-
-
 </script>
+
+<style lang="scss">
+h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.slogan {
+  margin: 1em 0 0 1em;
+  @media (min-width: 1280px) {
+    margin: 18em 0 0 20em;
+  }
+}
+
+.boxForm {
+  padding: 0.5em;
+  margin: 2em 3em 3em 3em;
+  background-color: rgba(255, 255, 255, .8);
+  @media (min-width: 1280px) {
+    width: 26em;
+    margin: 6em 3em 3em 3em;
+  }
+}
+
+input {
+  font-size: 0.5em;
+  padding: 1em;
+  border-top-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-bottom-width: 1px;
+  border-bottom-color: #040404;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.line{
+  margin: 1em;
+  display: flex;
+  justify-content: center;
+  input[type="submit"]{
+    border-radius: 50% 20% / 10% 40%;
+    padding: 1.5em;
+    font-size: 1em;
+    cursor:pointer;
+    font-weight: bold;
+    color: white;
+    background-color: #3498db;
+    border-width: 0;
+    @media (min-width: 1280px) {
+      font-size: 1.2em;
+    }
+  }
+}
+</style>

@@ -46,6 +46,10 @@ export default {
 <style scoped lang="scss">
 $backgrounColor1: white;
 
+h4 {
+  font-size: 1em;
+}
+
 .allPosts {
 display: flex;
 flex-direction: column-reverse;
