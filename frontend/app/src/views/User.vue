@@ -1,9 +1,11 @@
 <template>
   <div id="wall" class="wall">
 
+    <div class="avatar">
+      <img :src="profile.url_image" alt="">
+    </div>
     <div class="profile">
       <div class="profile_head">
-        <img :src="profile.url_image" alt="">
         <h4>{{ profile.username }}</h4>
       </div>
       <p>{{ profile.bio }}</p>
@@ -13,9 +15,10 @@
       <div class="post" v-for="message in messages" :key="message.content">
 
         <div class="post_text">
-          <h5>{{ message.title }} | <span>{{ message.updatedAt }}</span></h5>
-          <p>{{ message.content }}</p>
-          <hr>
+          <div class="bubble">
+            <h5>{{ message.title }} | <span>{{ message.updatedAt }}</span></h5>
+            <p>{{ message.content }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -70,14 +73,19 @@ export default {
     font-weight: bold;
   }
 }
-.profile_head {
-  text-align: center;
+.avatar {
+  display:flex;
+  justify-content: center;
   img { // A obtimiser
-    margin: 1em;
+    margin: 1em 1em -8em 1em;
     border-radius: 50%;
     width: 50%;
     height: 50%;
   }
+}
+.profile_head {
+  padding: 4em 1em 1em 1em;
+  text-align: center;
 }
 
 .wall_of_box {
@@ -85,6 +93,12 @@ export default {
   margin: 3em 0;
   padding: 2em;
   border-radius: 0 0 3em 3em;
+}
+.bubble {
+  margin: .8em;
+  padding: 1.8em;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5em;
 }
 
 </style>

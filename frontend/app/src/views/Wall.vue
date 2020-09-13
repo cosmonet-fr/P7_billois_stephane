@@ -14,8 +14,8 @@
     <div class="allPosts">
       <div class="post" v-for="message in messages" :key="message.content">
         <div class="user_post">
-          <img src="../assets/default_avatar.svg" alt="avatar">
-          <p class="username">{{message.user_id}}</p>
+          <img :src="message.url_image" alt="avatar">
+          <p class="username">{{message.username}}</p>
         </div>
         <div class="post_text">
           <h4>{{ message.title }} <!--| <span>{{ message.updatedAt }}</span>--></h4>
@@ -91,7 +91,7 @@ flex-direction: column-reverse;
 justify-content: flex-start;
 }
 .post {
-margin: 1em 0;
+margin: 1em;
 display: flex;
 justify-content: space-around;
 }
