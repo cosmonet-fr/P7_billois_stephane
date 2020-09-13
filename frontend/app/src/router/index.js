@@ -24,7 +24,7 @@ const routes = [
     component: () => import('../views/Wall.vue')
   },
   {
-    path: '/user',
+    path: '/user/:id',
     name: 'User',
     component: () => import('../views/User.vue')
   },
@@ -32,8 +32,8 @@ const routes = [
     path: '/message/:id',
     name: 'Message',
     component: () => import('../views/Message.vue')
-  }
-  //{ path: '/wall/:id', component: () => import('../views/Wall.vue') }
+  },
+
 ]
 
 const router = new VueRouter({

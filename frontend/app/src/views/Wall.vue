@@ -15,10 +15,10 @@
       <div class="post" v-for="message in messages" :key="message.content">
         <div class="user_post">
           <img :src="message.url_image" alt="avatar">
-          <p class="username">{{ message.username }}</p>
+          <p class="username"><a :href="'user/'+message.user_id">{{ message.username }}</a></p>
         </div>
         <div class="post_text">
-          <h4><a href="Message/2">{{ message.title }}</a> <!--| <span>{{ message.updatedAt }}</span>--></h4>
+          <h4><a :href="'message/'+message.id">{{ message.title }}</a> <!--| <span>{{ message.updatedAt }}</span>--></h4>
           <div class="bubble">
             <p>{{ message.content }}</p>
           </div>

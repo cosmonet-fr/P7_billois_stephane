@@ -1,6 +1,7 @@
 <template>
   <div id="wall" class="wall">
 
+    <p v-if="myUser.userId == $route.params.id"><a href="#">Modifier mon profil</a></p>
     <div class="avatar">
       <img :src="profile.url_image" alt="">
     </div>
@@ -31,10 +32,6 @@
 <script>
 //import Wall from '@/components/public_wall.vue'
 import VueJwtDecode from 'vue-jwt-decode'
-
-
-
-
 export default {
   data: function () {
     return {
@@ -49,16 +46,12 @@ export default {
     this.token = localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
     this.myUser = VueJwtDecode.decode(this.token);
-
-    axios.get('http://localhost:3000/users/' + this.myUser.userId)
+    axios.get('http://localhost:3000/users/' + this.$route.params.id)
     .then(response => (this.profile = response.data))
-
-    axios.get('http://localhost:3000/message/wall_of/' + this.myUser.userId)
+    axios.get('http://localhost:3000/message/wall_of/' + this.$route.params.id)
     .then(response => (this.messages = response.data))
   }
-
 }
-
 </script>
 
 <style scoped lang="scss">
@@ -88,7 +81,6 @@ export default {
   padding: 4em 1em 1em 1em;
   text-align: center;
 }
-
 .wall_of_box {
   background-color: #ffffffdd;
   margin: 3em 0;
@@ -101,5 +93,4 @@ export default {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 5em;
 }
-
 </style>
