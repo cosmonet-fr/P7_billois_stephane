@@ -37,7 +37,7 @@ exports.publicWall = ( req, res, next) => {
   async function getThePublicWall() {
     const sequelize = require('../connectDB');
     const { QueryTypes } = require('sequelize');
-    const publicWall = await sequelize.query("SELECT Messages.title, Messages.content, Messages.attachement, Messages.createdAt, Messages.updatedAt, Users.url_image, Users.username FROM Messages INNER JOIN Users ON Messages.user_id = Users.id", { type: QueryTypes.SELECT })
+    const publicWall = await sequelize.query("SELECT Messages.title, Messages.content, Messages.attachement, Messages.createdAt, Messages.updatedAt, Messages.id, Messages.user_id, Users.url_image, Users.username FROM Messages INNER JOIN Users ON Messages.user_id = Users.id", { type: QueryTypes.SELECT })
     console.table(publicWall);
     return res.status(200).json(publicWall);
   }
