@@ -80,6 +80,7 @@ h4 {
 }
 p {
   font-size: 1em;
+  text-align: justify;
   @media (min-width: 1280px) {
     font-size: 1em;
   }

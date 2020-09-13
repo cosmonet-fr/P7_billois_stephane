@@ -28,6 +28,11 @@ const routes = [
     name: 'User',
     component: () => import('../views/User.vue')
   },
+  {
+    path: '/message/:id',
+    name: 'Message',
+    component: () => import('../views/Message.vue')
+  }
   //{ path: '/wall/:id', component: () => import('../views/Wall.vue') }
 ]
 

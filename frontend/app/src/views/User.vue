@@ -78,9 +78,10 @@ export default {
   justify-content: center;
   img { // A obtimiser
     margin: 1em 1em -8em 1em;
-    border-radius: 50%;
+    border-radius: 50% 10%;
     width: 50%;
     height: 50%;
+    border: solid .5em #ffffffdd;
   }
 }
 .profile_head {
