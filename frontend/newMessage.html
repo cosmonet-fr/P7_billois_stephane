@@ -18,7 +18,7 @@
         <form id="newPost" @submit.prevent="submitPost">
           <div class="newPostText">
             <input type="text" name="title" placeholder="Titre" required v-model="title">
-            <input type="textarea" name="message" placeholder="Nouveau message" required v-model="message" >
+            <textarea name="message" placeholder="Nouveau message" required v-model="message"></textarea>
           </div>
           <input class="button" type="submit" value="Envoyer" />
         </form>

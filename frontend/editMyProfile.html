@@ -17,7 +17,7 @@
       <div class="newPost">
         <form id="newPost" @submit.prevent="editProfile">
           <div class="newPostText">
-            <!--<input type="file" name="avatar" v-model="avatar">-->
+            <input type="file" name="avatar" v-model="avatar">
             <input type="email" name="email" placeholder="E-mail" required v-model="email">
             <input type="text" name="username" placeholder="Nom ou pseudo" required v-model="username">
             <input type="textarea" name="bio" placeholder="Biographie" v-model="bio" >
@@ -44,7 +44,7 @@
           editProfile() {
             console.log('go');
             axios.put('http://localhost:3000/edit/' + this.myUser, {
-              //avatar: this.avatar,
+              avatar: this.avatar,
               email: this.email,
               username: this.username,
               bio: this.bio
