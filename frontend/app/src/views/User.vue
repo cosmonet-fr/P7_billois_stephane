@@ -1,7 +1,7 @@
 <template>
   <div id="wall" class="wall">
 
-    <p v-if="myUser.userId == $route.params.id"><a href="#">Modifier mon profil</a></p>
+    <p v-if="myUser.userId == $route.params.id"><a href="../user_edit">Modifier mon profil</a></p>
     <div class="avatar">
       <img :src="profile.url_image" alt="">
     </div>
@@ -38,7 +38,7 @@ export default {
       token: null,
       profile: [],
       messages: [],
-      myUser: null, // utiliser l'id du token
+      myUser: '', // utiliser l'id du token
     }
   },
   mounted () {
@@ -91,6 +91,6 @@ export default {
   margin: .8em;
   padding: 1.8em;
   background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 5em;
+  border-radius: 1em;
 }
 </style>
