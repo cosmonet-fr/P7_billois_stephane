@@ -1,6 +1,5 @@
 <template>
   <div id="wall" class="wall">
-    <p>{{ avatar }}</p>
 
     <form id="edit" @submit.prevent="editProfile">
       <div class="editText">
@@ -17,10 +16,18 @@
           <input type="text" name="username" placeholder="username" required v-model="username">
           <input type="email" name="email" placeholder="email" required v-model="email">
           <textarea rows="6" cols="20" name="message" placeholder="Biographie" v-model="bio"></textarea>
+          <input class="button" type="submit" value="Valider" />
         </div>
       </div>
-      <input class="button" type="submit" value="Valider" />
+
+      <div class="button" v-if="!boxNewPassWd" v-on:click="boxNewPassWd = 1">
+        <p>Changer de mot de passe</p>
+      </div>
+      <div class="edit_box" v-if="boxNewPassWd" >
+        <NewPassWd/>
+      </div>
     </form>
+
 
 
   </div>
@@ -31,8 +38,12 @@
 <script>
 const axios = require('axios');
 //import Wall from '@/components/public_wall.vue'
+import NewPassWd from '@/components/NewPassWd.vue'
 import VueJwtDecode from 'vue-jwt-decode'
+
 export default {
+  name: 'Password',
+  components: { NewPassWd },
   data: function () {
     return {
       token: null,
@@ -42,6 +53,7 @@ export default {
       email: '',
       username: '',
       bio: '',
+      boxNewPassWd: '',
     }
   },
   methods: {
@@ -133,6 +145,7 @@ textarea {
   border: none;
 }
 .button {
+  margin: 1em;
   width: 50%;
   border-radius: 50% 20% / 10% 40%;
   padding: 1.5em;
