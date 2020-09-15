@@ -113,9 +113,6 @@ export default {
           //this.message = 'Vous pouvez vous connecter avec votre e-mail' + this.newEmail + ' et votre mot de passe que vous venez de choisir. Ou vous pouvez créer un nouveau compte en cliquant ici.'
         })
         .catch(error => {
-          console.log('error');
-          console.log(error);
-          console.log(error.response.data.error);
           this.error = error.response.data.error
         })
 

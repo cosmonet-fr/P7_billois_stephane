@@ -5,8 +5,8 @@
       <div class="newPost">
         <form id="newPost" @submit.prevent="submitPost">
           <div class="newPostText">
-            <input type="text" name="title" placeholder="Titre" required v-model="newTitle">
-            <textarea rows="6" cols="16" name="message" placeholder="Nouveau message" required v-model="newPost"></textarea>
+            <input type="text" name="title" placeholder="Titre (facultatif)" v-model="newTitle">
+            <textarea rows="20" cols="16" name="message" placeholder="Nouveau message" required v-model="newPost"></textarea>
           </div>
           <input class="button" type="submit" value="Envoyer" />
         </form>

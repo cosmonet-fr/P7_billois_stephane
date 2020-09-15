@@ -33,8 +33,8 @@ exports.signup = (req, res, next) => {
       bio: req.body.bio,
       //password: req.body.password
       password: hash
-    }).then( user => { res.status(201).json({message: "Email et mot de passe ok !!!"} ); })
-    .catch(exception => { res.status(400).json({error: "email déjà présant dans la base de données !"} ) });
+    }).then( user => { res.status(201).json({message: "Votre compte a bien été créé :-)"} ); })
+    .catch(exception => { res.status(400).json({error: "Cet e-mail est déjà présant dans la base de données !"} ) });
 
 
   })

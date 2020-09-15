@@ -42,6 +42,11 @@ const routes = [
     path: '/user_edit',
     name: 'UserEdit',
     component: () => import('../views/UserEdit.vue')
+  },
+  {
+    path: '/remove_me',
+    name: 'RemoveMe',
+    component: () => import('../views/RemoveMe.vue')
   }
 
 ]

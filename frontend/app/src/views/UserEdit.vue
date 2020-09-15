@@ -3,29 +3,30 @@
 
     <form id="edit" @submit.prevent="editProfile">
       <div class="editText">
-        <div v-if="!avatar">
-          <img :src="avatar" />
-          <input type="file" name="avatar" placeholder="Avatar" @change="avatarChange">
-        </div>
-        <div class="avatar" v-else>
-          <button class="button" @click="removeImage">Changer d'image</button>
-          <img :src="avatar" />
-
-        </div>
         <div class="edit_box">
+          <div v-if="!avatar">
+            <img :src="avatar" />
+            <input type="file" name="avatar" placeholder="Avatar" @change="avatarChange">
+          </div>
+          <div class="avatar" v-else>
+            <button class="button" @click="removeImage">Changer d'image</button>
+            <img :src="avatar" />
+
+          </div>
           <input type="text" name="username" placeholder="username" required v-model="username">
           <input type="email" name="email" placeholder="email" required v-model="email">
           <textarea rows="6" cols="20" name="message" placeholder="Biographie" v-model="bio"></textarea>
           <input class="button" type="submit" value="Valider" />
+
+          <p class="a" v-if="!boxNewPassWd" v-on:click="boxNewPassWd = 1">[Changer de mot de passe]</p>
+
+          <p> <a class="error" href="../remove_me">[supprimer mon compte]</a></p>
+        </div>
+        <div class="edit_box" v-if="boxNewPassWd" >
+          <NewPassWd/>
         </div>
       </div>
 
-      <div class="button" v-if="!boxNewPassWd" v-on:click="boxNewPassWd = 1">
-        <p>Changer de mot de passe</p>
-      </div>
-      <div class="edit_box" v-if="boxNewPassWd" >
-        <NewPassWd/>
-      </div>
     </form>
 
 
@@ -105,7 +106,10 @@ export default {
   height: 100%;
   min-height: 52rem;
   background-color: #eee;
-
+}
+.editText {
+  display: flex;
+  flex-direction: column;
 }
 .profile {
   background-color: #ffffffdd;
@@ -124,15 +128,17 @@ export default {
   padding: 6em 2em 2em 2em;
   border-radius: 3em;
   @media (min-width: 1280px) {
+    display: flex;
+    flex-direction: column;
     margin: 3em 20em -3em 20em;
   }
 }
 .avatar {
   display:flex;
-  flex-direction: column;
-  justify-content: center;
+  //flex-direction: column;
+  //justify-content: center;
   img { // A obtimiser
-    margin: 1em 1em -8em 1em;
+    margin: 1em;
     border-radius: 50% 10%;
     width: 50%;
     height: 50%;
