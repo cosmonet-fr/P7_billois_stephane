@@ -13,7 +13,7 @@
           </div>
           <div class="line">
             <!--<p><label for="email">email :</label></p>-->
-            <p><input type="text" name="email" id="email" placeholder="Email" size="25" maxlength="255" required v-model="email"/></p>
+            <p><input type="email" name="email" id="email" placeholder="Email" size="25" maxlength="255" required v-model="email"/></p>
 
           </div>
           <div class="line">
@@ -21,6 +21,7 @@
             <p><input type="password" name="password" id="password" placeholder="Mot de passe" size="25" maxlength="255" required v-model="password"/></p>
 
           </div>
+          <p v-if="error !== null" class="error">Erreur: {{ error }}</p>
           <div class="line">
             <p v-on:click="route = 'signup'" class="a">{{ message }}</p>
           </div>
@@ -91,7 +92,10 @@ export default {
           console.log(res.data);
           localStorage.setItem("token", res.data.token);
           router.push("Wall")
-        });
+        })
+        .catch(error => {
+          this.error = error.response.data.errors[0]
+        })
 
       }else if (this.route === 'signup') {
         axios.post('http://localhost:3000/' + this.route, {
@@ -118,6 +122,7 @@ export default {
       newUserName: '',
       newPassword: '',
       confirmPassword: '',
+      error: null,
     }
   },
 

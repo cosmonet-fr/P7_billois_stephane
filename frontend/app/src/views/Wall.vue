@@ -2,15 +2,11 @@
   <div id="wall" class="wall">
 
     <div class="page_wall">
-      <!--<div class="newPost">
-        <form id="newPost" @submit.prevent="submitPost">
-          <div class="newPostText">
-            <input type="text" name="title" placeholder="Titre" required v-model="newTitle">
-            <textarea rows="6" cols="16" name="message" placeholder="Nouveau message" required v-model="newPost"></textarea>
-          </div>
-          <input class="button" type="submit" value="Envoyer" />
-        </form>
-      </div>-->
+
+      <a href="../new_message"><div class="button">
+        <p>Écrire un message</p>
+      </div></a>
+
 
       <div class="allPosts">
         <div class="post" v-for="message in messages" :key="message.content">
@@ -92,7 +88,7 @@ h4 {
 .wall {
   width: 100%;
   height: 100%;
-  margin-top: -3rem;
+  min-height: 52rem;
   background-color: #eee;
 
 }
@@ -168,5 +164,17 @@ h4 {
     border-right: none;
 
   }
+}
+.button {
+  p{
+    text-align: center;
+
+  }
+  padding: 1.5em;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  background-color: #3498db;
 }
 </style>
