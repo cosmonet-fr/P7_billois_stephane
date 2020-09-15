@@ -9,7 +9,9 @@
             <input type="file" name="avatar" placeholder="Avatar" @change="avatarChange">
           </div>
           <div class="avatar" v-else>
-            <button class="button" @click="removeImage">Changer d'image</button>
+            <div class="">
+              <button class="button" @click="removeImage">Changer d'image</button>
+            </div>
             <img :src="avatar" />
 
           </div>
@@ -130,13 +132,12 @@ export default {
   @media (min-width: 1280px) {
     display: flex;
     flex-direction: column;
-    margin: 3em 20em -3em 20em;
+    margin: 0em 20em -3em 20em;
   }
 }
 .avatar {
   display:flex;
-  //flex-direction: column;
-  //justify-content: center;
+  flex-direction: column-reverse;
   img { // A obtimiser
     margin: 1em;
     border-radius: 50% 10%;

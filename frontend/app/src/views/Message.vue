@@ -3,14 +3,14 @@
 
     <div class="allPosts">
       <div class="post">
-        <!--<div class="user_post">
-          <img src="pictures/default_avatar.svg" alt="avatar">
-          <p class="username">{{message.user_id}}</p>
-        </div>-->
+
         <div class="post_text">
           <h4>{{ message.title }} | <span>{{ message.updatedAt }}</span></h4>
           <div class="bubble">
             <p>{{ message.content }}</p>
+            <div  v-if="myUser.userId === message.user_id" class="upload">
+              <p><a href="#">[Supprimer]</a> <a :href="'../update_message/'+myUser.userId+'&'+this.$route.params.id">[Modifier]</a></p>
+            </div>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
 
 <script>
 //import Wall from '@/components/public_wall.vue'
-//import VueJwtDecode from 'vue-jwt-decode'
+import VueJwtDecode from 'vue-jwt-decode'
 
 
 
@@ -30,6 +30,7 @@ export default {
   data: function () {
     return {
       token: null,
+      myUser: null,
       message: [],
 
     }
@@ -38,6 +39,7 @@ export default {
     const axios = require('axios');
     this.token = localStorage.getItem('token');
     axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
+    this.myUser = VueJwtDecode.decode(this.token);
     axios.get('http://localhost:3000/message/post/' + this.$route.params.id)
     .then(response => (this.message = response.data))
   }
@@ -53,6 +55,9 @@ h4 {
   font-size: 1em;
 }
 .wall {
+  width: 100%;
+  height: 100%;
+  min-height: 52rem;
   background-color: #eee;
 }
 .allPosts {

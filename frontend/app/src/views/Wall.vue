@@ -108,11 +108,11 @@ h4 {
   display: flex;
   justify-content: space-around;
   transition: all .4s ease-out;
-  &:hover {
-    //border-radius: 1em;
-    transform: scale(1.1);
+  //&:hover {
+  //  //border-radius: 1em;
+  //  transform: scale(1.1);
 
-  }
+  //}
 }
 .user_post {
   width: 30%;

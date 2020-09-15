@@ -39,6 +39,11 @@ const routes = [
     component: () => import('../views/NewMessage.vue')
   },
   {
+    path: '/update_message/:id&:id_post',
+    name: 'UpdateMessage',
+    component: () => import('../views/UpdateMessage.vue')
+  },
+  {
     path: '/user_edit',
     name: 'UserEdit',
     component: () => import('../views/UserEdit.vue')
