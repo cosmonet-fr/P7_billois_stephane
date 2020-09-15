@@ -66,6 +66,7 @@
           <div class="line">
             <input class="button" type="submit" value="Inscription"/>
           </div>
+          <p v-if="error !== null" class="error">Erreur: {{ error }}</p>
           <div class="line">
             <p v-on:click="route = 'login'" class="a">Vous connectez</p>
           </div>
@@ -103,11 +104,20 @@ export default {
           username: this.newUserName,
           password: this.newPassword
         })
-        .then(function () {
-          console.log('Nouvelle utilisateur enregistré !');
-        });
-        this.route = 'login'
-        this.message = 'Vous pouvez vous connecter avec votre e-mail' + this.newEmail + ' et votre mot de passe que vous venez de choisir. Ou vous pouvez créer un nouveau compte en cliquant ici.'
+        .then(response => {
+          console.log(response);
+          this.message = response.data.message;
+          this.route = 'login';
+          this.email = this.newEmail;
+          this.password = this.newPassword;
+          //this.message = 'Vous pouvez vous connecter avec votre e-mail' + this.newEmail + ' et votre mot de passe que vous venez de choisir. Ou vous pouvez créer un nouveau compte en cliquant ici.'
+        })
+        .catch(error => {
+          console.log('error');
+          console.log(error);
+          console.log(error.response.data.error);
+          this.error = error.response.data.error
+        })
 
       }
     }
