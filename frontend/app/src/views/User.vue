@@ -55,6 +55,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.wall {
+  width: 100%;
+  height: 100%;
+  min-height: 52rem;
+  background-color: #eee;
+
+}
 .profile {
   background-color: #ffffffdd;
   margin: 3em 0 -3em 0;
@@ -64,6 +71,9 @@ export default {
     font-size: 3em;
     margin: 0;
     font-weight: bold;
+  }
+  @media (min-width: 1280px) {
+    margin: 3em 20em -3em 20em;
   }
 }
 .avatar {
@@ -76,6 +86,11 @@ export default {
     height: 50%;
     border: solid .5em #ffffffdd;
   }
+  @media (min-width: 1280px) {
+    img {
+      width: 19%;
+    }
+  }
 }
 .profile_head {
   padding: 4em 1em 1em 1em;
@@ -83,9 +98,12 @@ export default {
 }
 .wall_of_box {
   background-color: #ffffffdd;
-  margin: 3em 0;
+  margin: 0;
   padding: 2em;
   border-radius: 0 0 3em 3em;
+  @media (min-width: 1280px) {
+    margin: 0 20em;
+  }
 }
 .bubble {
   margin: .8em;

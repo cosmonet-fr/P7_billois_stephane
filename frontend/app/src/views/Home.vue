@@ -130,10 +130,20 @@ h3 {
   font-size: 1.5em;
   font-weight: bold;
 }
+
+.home {
+  @media (min-width: 1280px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+
+  }
+}
 .slogan {
   margin: 1em 0 0 1em;
   @media (min-width: 1280px) {
     margin: 18em 0 0 20em;
+    height: 100%;
   }
 }
 
@@ -156,12 +166,20 @@ input {
   border-bottom-width: 1px;
   border-bottom-color: #040404;
   background-color: rgba(255, 255, 255, 0);
+  @media (min-width: 1280px) {
+    font-size: 1em;
+    border-bottom-width: 4px;
+
+  }
 }
 
 .line{
   margin: 1em;
   display: flex;
   justify-content: center;
+  @media (min-width: 1280px) {
+    margin: 3em;
+  }
   input[type="submit"]{
     border-radius: 50% 20% / 10% 40%;
     padding: 1.5em;

@@ -52,7 +52,9 @@ $backgrounColor1: white;
 h4 {
   font-size: 1em;
 }
-
+.wall {
+  background-color: #eee;
+}
 .allPosts {
 display: flex;
 flex-direction: column-reverse;

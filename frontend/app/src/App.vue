@@ -50,11 +50,12 @@ h2 {
   color: $backgrounColor1;
   font-weight: 400;
   @media (min-width: 1280px) {
+    font-size: 7em;
     position: relative;
     right: 2em;
     span {
       position: relative;
-      top: -20px; right: -127px;
+      top: -20px; right: -105px;
     }
   }
   span {
@@ -100,6 +101,7 @@ a, .a {
   color: $errorColor;
 }
 body {
+  height: 59rem;
   background-color: #eee;
   background-image: url("./assets/wallpaper_gsm.jpg");
   background-size: cover;
@@ -114,6 +116,9 @@ header {
   display: flex;
   background-color: white;
   opacity: .9;
+  img {
+    width: 3rem;
+  }
 }
 #app {
   font-family: 'nevis-FontZillion', Avenir, Helvetica, Arial, sans-serif;
