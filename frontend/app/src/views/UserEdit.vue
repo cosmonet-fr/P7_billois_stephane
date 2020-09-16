@@ -74,7 +74,6 @@ export default {
       formData.append('email', this.email);
       formData.append('username', this.username);
       formData.append('bio', this.bio);
-      console.table(formData);
       axios.put('http://localhost:3000/edit/' + this.myUser.userId, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'

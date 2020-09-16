@@ -17,6 +17,7 @@
           <div class="post_text">
             <h4><a :href="'message/'+message.id">{{ message.title }}</a> <!--| <span>{{ message.updatedAt }}</span>--></h4>
             <div class="bubble">
+              <a :href="'message/'+message.id"><img v-if="message.attachement !== null" :src="message.attachement" alt="media"></a>
               <p>{{ message.content }}</p>
             </div>
           </div>

@@ -6,6 +6,7 @@
         <form id="newPost" @submit.prevent="submitPost">
           <div class="newPostText">
             <input type="text" name="title" placeholder="Titre (facultatif)" v-model="newTitle">
+            <input type="file" id="file" ref="file" name="media" placeholder="Media" @change="handleFileUpload()">
             <textarea rows="20" cols="16" name="message" placeholder="Nouveau message" required v-model="newPost"></textarea>
           </div>
           <input class="button" type="submit" value="Envoyer" />
@@ -28,26 +29,33 @@ import VueJwtDecode from 'vue-jwt-decode'
 export default {
   data: function () {
     return {
-      token: null,
+      token: '',
       messages: [],
-      myUser: null, // utiliser l'id du token
-      newTitle: null,
-      newPost: null,
+      myUser: '', // utiliser l'id du token
+      newTitle: '',
+      newPost: '',
+      file: ''
 
     }
   },
   methods: {
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+    },
     submitPost: function() {
       const router = this.$router;
+      let formData = new FormData();
+
+      formData.append('media', this.file);
+      formData.append('title', this.newTitle);
+      formData.append('message', this.newPost);
       const axios = require('axios');
-      axios.post('http://localhost:3000/message/new/' + this.myUser.userId, {
-        title: this.newTitle,
-        message: this.newPost
+      axios.post('http://localhost:3000/message/new/' + this.myUser.userId, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
-      this.newTitle = null;
-      this.newPost = null;
       router.push("Wall");
-      //vm.$forceUpdate();
 
     }
   },

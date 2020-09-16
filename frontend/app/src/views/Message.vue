@@ -7,6 +7,7 @@
         <div class="post_text">
           <h4>{{ message.title }} | <span>{{ message.updatedAt }}</span></h4>
           <div class="bubble">
+            <img v-if="message.attachement !== null" :src="message.attachement" alt="media">
             <p>{{ message.content }}</p>
             <div  v-if="myUser.userId === message.user_id" class="upload">
               <p><a href="#" v-on:click="removeMsg()">[Supprimer]</a> <a :href="'../update_message/'+myUser.userId+'&'+this.$route.params.id">[Modifier]</a></p>
