@@ -6,7 +6,7 @@
       <p>moderator: {{ moderator }}</p>
       <p>{{ msg }}</p>
       <hr>
-      <div class="list_box">
+      <div v-if="moderator" class="list_box">
         <div class="list_line">
           <div class="element_id" ><p>ID</p></div><div class="element" ><p>User Name</p></div><div class="element" ><p>Email</p></div><div class="element_id" ><p>Suppr</p></div><div class="element_id" ><p>Mod</p></div>
         </div>

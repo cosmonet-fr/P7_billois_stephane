@@ -5,6 +5,7 @@
       <div class="post">
 
         <div class="post_text">
+          <p class="error a" v-if="youAreModerator" v-on:click="removeMsgByModerator()" >[SUPPRIMER CE MESSAGE]</p>
           <h4>{{ message.title }} | <span>{{ message.updatedAt }}</span></h4>
           <div class="bubble">
             <img v-if="message.attachement !== null" :src="message.attachement" alt="media">
@@ -33,6 +34,7 @@ export default {
       token: null,
       myUser: null,
       message: [],
+      youAreModerator: 0
 
     }
   },
@@ -43,12 +45,24 @@ export default {
     this.myUser = VueJwtDecode.decode(this.token);
     axios.get('http://localhost:3000/message/post/' + this.$route.params.id)
     .then(response => (this.message = response.data))
+
+    //Le visiteur est-il admin ?
+    axios.get('http://localhost:3000/users/' + this.myUser.userId)
+    .then(response => (this.youAreModerator = response.data.moderator))
+
   },
   methods: {
     removeMsg: function() {
       const router = this.$router;
       const axios = require('axios');
       axios.post('http://localhost:3000/message/rm/'+this.myUser.userId+'&'+this.$route.params.id);
+      router.push("../Wall")
+
+    },
+    removeMsgByModerator: function() {
+      const router = this.$router;
+      const axios = require('axios');
+      axios.post('http://localhost:3000/admin_panel/postRm/'+this.$route.params.id);
       router.push("../Wall")
 
     }
