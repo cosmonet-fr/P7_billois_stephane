@@ -6,7 +6,7 @@ const isAdmin = require('../isAdmin');
 const isModerator = require('../isModerator');
 
 
-router.put('/is_moderator/:id(\\d+)', auth, isAdmin, adminCtrl.isModerator);
+router.put('/is_moderator', auth, isAdmin, adminCtrl.isModerator);
 
 //DELETE Message !
 router.post('/postRm/:idPOST(\\d+)', auth, isModerator, adminCtrl.deleteMessage);

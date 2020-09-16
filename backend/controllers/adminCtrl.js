@@ -2,14 +2,13 @@ const User = require('../models/user');
 const Message = require('../models/message');
 
 exports.isModerator = (req, res, next) => {
-  console.log('go');
   console.log(req.params.id);
   async function isModerator(id) {
-    await User.update({ moderator: req.body.moderator }, {
+    await User.update({ moderator: 1 }, {
       where: { id: id }
     }
     )}
-    isModerator(req.params.id);
+    isModerator(req.body.moderator);
     return res.status(200).json({ moderator: req.body.moderator })
 }
 
