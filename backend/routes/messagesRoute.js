@@ -5,13 +5,16 @@ const auth2 = require('../auth2');
 const ownerControl = require('../ownerControl');
 const messagesCtrl = require('../controllers/messagesCtrl');
 const Message = require('../models/message');
+const multer = require('multer');
+const multerMedia = require('../multerMedia');
+const upload = multer({ dest: 'pictures/' });
 
 
 //new Message
 router.post('/new/:id(\\d+)', auth2, messagesCtrl.new);
 
 //update Message
-router.put('/edit/:id&:idPOST', auth2, ownerControl, messagesCtrl.edit);
+router.put('/edit/:id&:idPOST', auth2, ownerControl, multerMedia, messagesCtrl.edit);
 
 //DELETE Message !
 router.post('/rm/:id&:idPOST', auth2, ownerControl, messagesCtrl.deleteMessage);

@@ -12,13 +12,33 @@ exports.new = (req, res, next) => {
 
 // update Message
 exports.edit = (req, res, next) => {
+  if (req.file === undefined) {
+    editMessage();
+    return res.status(201).json({editMessage: req.body})
+
+  } else if (req.file !== undefined) {
+    const url_attachement = req.protocol + '://' + req.get('host') + '/' + req.file.path;
+    editMessage();
+    addMedia(url_attachement);
+    return res.status(201).json({editMessage: url_attachement})
+
+
+  }
   async function editMessage() {
     await Message.update({title: req.body.title, content: req.body.message }, {
       where: { id: req.params.idPOST }
     })
   }
-  editMessage();
-  return res.status(201).json({editMessage: req.body})
+  async function addMedia(url) {
+    console.debug(Message);
+    console.log(req.params.idPOST);
+    await Message.update({
+      attachement: url
+    },
+  {where: {id: req.params.idPOST}});
+  }
+  //editMessage();
+  //return res.status(201).json({editMessage: req.body})
 }
 
 //Delete Message

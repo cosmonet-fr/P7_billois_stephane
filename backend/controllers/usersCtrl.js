@@ -2,7 +2,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-console.log(User);
 const { validationResult } = require('express-validator');
 const multer = require('multer');
 const upload = multer({ dest: 'pictures/' });
@@ -73,12 +72,10 @@ if (login === null) {
         // Il faut ajouter l'id de l'utilisateur dans le TOKEN
         console.table(login.id);
         var token = jwt.sign({ userId: login.id }, 'RANDOM_TOKEN_SECRET', { expiresIn: '3h' });
-        console.log(token);
         return res.status(200).json({ token: token });
 
       }
   });
-  console.log(login instanceof User);
   console.log(login.email);
   //res.json("Email et mot de passe ok !!!");
 }
@@ -112,8 +109,6 @@ exports.getProfil = (req, res, next) => {
       where: { id: req.params.id },
       attributes: ['id', 'email', 'username', 'url_image', 'bio', 'admin', 'createdAt', 'updatedAt' ]
     });
-    console.log(thisUser);
-    //console.log(req.params.id);
     return res.status(200).json(thisUser);
 
 }
@@ -129,9 +124,7 @@ exports.deleteProfil = (req, res, next) => {
     const sequelize = require('../connectDB');
     const thisProfil = await User.findOne({ where: { id: req.params.id } });
     bcrypt.compare(req.body.password, thisProfil.password, function(err, result) {
-      console.log(result);
       const magicPhrase = 'Je souhaite supprimer mon compte ' + thisProfil.username + '.';
-      console.log(magicPhrase);
       if (result === true && magicPhrase === req.body.magicPhrase) {
         async function startDeleteProfilSQL() {
           const { QueryTypes } = require('sequelize');
@@ -172,7 +165,7 @@ exports.edit = (req, res, next) => {
     },
     {where: {id: req.params.id}});
   }
-  // Get url avatar fi she existed
+  // Get url avatar if she existed
   async function startEditAvatar(url) {
     console.debug(User);
     await User.update({
@@ -196,7 +189,7 @@ exports.edit = (req, res, next) => {
 
     if (size < 2000000) {
       startEditProfil()
-      return res.status(201).json({message: 'Nouvelle Image !!!'});
+      return res.status(201).json({message: 'Votre profil à été actualisé'});
     } else {
       return res.status(201).json({message: 'Votre image est trop lourde ! 2 Mo max'});
     }
@@ -217,7 +210,6 @@ exports.newPassWd = (req, res, next) => {
   async function startNewPassWd() {
     thisProfil = await User.findOne({ where: { id: req.params.id } });
     bcrypt.compare(req.body.password, thisProfil.password, function(err, result) {
-      console.log(result);
       if (result === true) {
         bcrypt.hash(req.body.newPassword, 10)
         .then(hash => {
