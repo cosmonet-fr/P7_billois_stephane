@@ -52,6 +52,11 @@ const routes = [
     path: '/remove_me',
     name: 'RemoveMe',
     component: () => import('../views/RemoveMe.vue')
+  },
+  {
+    path: '/admin_panel',
+    name: 'AdminPanel',
+    component: () => import('../views/AdminPanel.vue')
   }
 
 ]

@@ -107,7 +107,7 @@ exports.getProfil = (req, res, next) => {
     const { QueryTypes } = require('sequelize');
     const thisUser = await User.findOne({
       where: { id: req.params.id },
-      attributes: ['id', 'email', 'username', 'url_image', 'bio', 'admin', 'createdAt', 'updatedAt' ]
+      attributes: ['id', 'email', 'username', 'url_image', 'bio', 'admin', 'moderator', 'createdAt', 'updatedAt' ]
     });
     return res.status(200).json(thisUser);
 
