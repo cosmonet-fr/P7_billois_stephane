@@ -7,7 +7,10 @@
         <p>Écrire un message</p>
       </div></a>
 
+      <div class="meta">
+        <p><a :href="'/user/'+myUser.userId">Mon Profil</a></p>
 
+      </div>
       <div class="allPosts">
         <div class="post" v-for="message in messages" :key="message.content">
           <div class="user_post">
@@ -92,6 +95,16 @@ h4 {
   min-height: 52rem;
   background-color: #eee;
 
+}
+
+.meta{
+  p {
+
+    text-align: center;
+  }
+  a {
+    font-weight: bold;
+  }
 }
 
 .allPosts {
