@@ -11,7 +11,7 @@ const upload = multer({ dest: 'pictures/' });
 
 
 //new Message
-router.post('/new/:id(\\d+)', auth2, messagesCtrl.new);
+router.post('/new/:id(\\d+)', auth2, multerMedia, messagesCtrl.new);
 
 //update Message
 router.put('/edit/:id&:idPOST', auth2, ownerControl, multerMedia, messagesCtrl.edit);

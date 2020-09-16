@@ -3,11 +3,21 @@ const Message = require('../models/message');
 
 // new Message
 exports.new = (req, res, next) => {
+  if (req.file === undefined) {
+    newMessage()
+    return res.status(201).json({newMessage: req.body });
+  } else if (req.file !== undefined) {
+    const url_attachement = req.protocol + '://' + req.get('host') + '/' + req.file.path;
+    addMedia(url_attachement);
+    return res.status(201).json({newMessage: req.body });
+  }
   async function newMessage() {
     await Message.create({user_id: req.params.id, title: req.body.title, content: req.body.message });
   }
-  newMessage()
-  return res.status(201).json({newMessage: req.body });
+  async function addMedia(url) {
+    console.debug(Message);
+    await Message.create({user_id: req.params.id, title: req.body.title, content: req.body.message, attachement: url });
+  }
 }
 
 // update Message
