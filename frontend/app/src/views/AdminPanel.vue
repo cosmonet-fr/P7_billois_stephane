@@ -4,13 +4,14 @@
       <h3>Vous êtes {{ role }}, de grands pouvoirs impliquent de grandes responsabilités.</h3>
       <p>admin: {{ admin }}</p>
       <p>moderator: {{ moderator }}</p>
+      <p>{{ msg }}</p>
       <hr>
       <div class="list_box">
         <div class="list_line">
           <div class="element_id" ><p>ID</p></div><div class="element" ><p>User Name</p></div><div class="element" ><p>Email</p></div><div class="element_id" ><p>Suppr</p></div><div class="element_id" ><p>Mod</p></div>
         </div>
         <div class="list_line" v-for="user in users" :key="user">
-          <div class="element_id" ><p><a :href="'user/'+user.id">{{ user.id }}</a></p></div><div class="element" ><p><a :href="'user/'+user.id">{{ user.username}}</a></p></div><div class="element" ><p> <a :href="'mailto:'+user.email">{{ user.email }}</a> </p></div><div class="element_id" ><p class="error a" >[X]</p></div><div class="element_id" ><p class="a" >0</p></div>
+          <div class="element_id" ><p><a :href="'user/'+user.id">{{ user.id }}</a></p></div><div class="element" ><p><a :href="'user/'+user.id">{{ user.username}}</a></p></div><div class="element" ><p> <a :href="'mailto:'+user.email">{{ user.email }}</a> </p></div><div class="element_id" ><p class="error a" v-on:click="removeUser(user.id)" >[X]</p></div><div class="element_id" ><p class="a" >{{ user.moderator }}</p></div>
         </div>
 
       </div>
@@ -33,6 +34,7 @@ import VueJwtDecode from 'vue-jwt-decode'
         myUser: '',
         test: [],
         users: [],
+        msg: '',
       }
     },
     mounted () {
@@ -44,6 +46,17 @@ import VueJwtDecode from 'vue-jwt-decode'
       .then(response => (this.admin = response.data.admin, this.moderator = response.data.moderator))
       axios.get('http://localhost:3000/users')
       .then(response => (this.users = response.data))
+    },
+    methods: {
+      removeUser: function(idRm) {
+        const axios = require('axios');
+        axios.post('http://localhost:3000/admin_panel/userRm', {
+          idRm: idRm,
+        })
+        .then(response => (this.msg = response.data))
+
+
+      }
     }
   }
 </script>

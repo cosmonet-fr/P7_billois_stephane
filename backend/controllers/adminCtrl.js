@@ -36,10 +36,13 @@ exports.deleteSimpleUser = (req, res, next) => {
     } else if (user.moderator === true) {
       return res.status(401).json({error: 'Vous n\'avez pas le droit de supprimer le compte d\'un Modérateur !'})
     } else {
+      const sequelize = require('../connectDB');
+      const { QueryTypes } = require('sequelize');
+      const SqlQueryForDeleteMsg = await sequelize.query("DELETE Messages FROM Messages WHERE user_id='" + idToRemove + "'",  { type: QueryTypes.DELETE });
       await User.destroy({
         where: {id: idToRemove}
       })
-      return res.status(200).json({remove: idToRemove})
+      return res.status(200).json({supprimer: idToRemove})
     }
     //return res.status(400).json({error: "problème inattendu"})
   }

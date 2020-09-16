@@ -91,7 +91,7 @@ exports.getAllUsers = (req, res, next) => {
   async function startGetAllUsers() {
     const sequelize = require('../connectDB');
     const { QueryTypes } = require('sequelize');
-    const usersList = await sequelize.query("SELECT id, username, email FROM Users", { type: QueryTypes.SELECT })
+    const usersList = await sequelize.query("SELECT id, username, email, moderator FROM Users", { type: QueryTypes.SELECT })
     console.table(usersList);
     return res.status(200).json(usersList);
   }
