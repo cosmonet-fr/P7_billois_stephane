@@ -14,7 +14,7 @@ router.post('/new/:id(\\d+)', auth2, messagesCtrl.new);
 router.put('/edit/:id&:idPOST', auth2, ownerControl, messagesCtrl.edit);
 
 //DELETE Message !
-router.delete('/rm/:id&:idPOST', auth2, ownerControl, messagesCtrl.deleteMessage);
+router.post('/rm/:id&:idPOST', auth2, ownerControl, messagesCtrl.deleteMessage);
 
 //Public Wall
 router.get('/public_wall', auth, messagesCtrl.publicWall);

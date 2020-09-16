@@ -9,7 +9,7 @@
           <div class="bubble">
             <p>{{ message.content }}</p>
             <div  v-if="myUser.userId === message.user_id" class="upload">
-              <p><a href="#">[Supprimer]</a> <a :href="'../update_message/'+myUser.userId+'&'+this.$route.params.id">[Modifier]</a></p>
+              <p><a href="#" v-on:click="removeMsg()">[Supprimer]</a> <a :href="'../update_message/'+myUser.userId+'&'+this.$route.params.id">[Modifier]</a></p>
             </div>
           </div>
         </div>
@@ -42,6 +42,15 @@ export default {
     this.myUser = VueJwtDecode.decode(this.token);
     axios.get('http://localhost:3000/message/post/' + this.$route.params.id)
     .then(response => (this.message = response.data))
+  },
+  methods: {
+    removeMsg: function() {
+      const router = this.$router;
+      const axios = require('axios');
+      axios.post('http://localhost:3000/message/rm/'+this.myUser.userId+'&'+this.$route.params.id);
+      router.push("../Wall")
+
+    }
   }
 
 }

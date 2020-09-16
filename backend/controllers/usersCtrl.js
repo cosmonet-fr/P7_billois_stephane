@@ -135,6 +135,7 @@ exports.deleteProfil = (req, res, next) => {
       if (result === true && magicPhrase === req.body.magicPhrase) {
         async function startDeleteProfilSQL() {
           const { QueryTypes } = require('sequelize');
+          const SqlQueryForDeleteMsg = await sequelize.query("DELETE Messages FROM Messages WHERE user_id='" + req.params.id + "'",  { type: QueryTypes.DELETE });
           const SqlQueryForDelete = await sequelize.query("DELETE Users FROM Users WHERE id='" + req.params.id + "'",  { type: QueryTypes.DELETE });
         }
         startDeleteProfilSQL();

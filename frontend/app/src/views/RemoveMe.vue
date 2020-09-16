@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     removeMe: function() {
+      const router = this.$router;
       const axios = require('axios');
       this.token = localStorage.getItem('token');
       axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
@@ -50,6 +51,9 @@ export default {
       })
       .then(response => {
         console.log(response);
+        localStorage.removeItem("token");
+        router.push("/")
+
       })
       .catch(error => {
         console.error(error.response.data.errors[0]);
