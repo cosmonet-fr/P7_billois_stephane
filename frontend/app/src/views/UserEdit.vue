@@ -4,9 +4,9 @@
     <form id="edit" @submit.prevent="editProfile">
       <div class="editText">
         <div class="edit_box">
-          <div v-if="!avatar">
+          <!--<div v-if="!avatar">
             <img :src="avatar" />
-            <input type="file" name="avatar" placeholder="Avatar" @change="avatarChange">
+            <input type="file" id="file" ref="file" name="avatar" placeholder="Avatar" @change="handleFileUpload()">
           </div>
           <div class="avatar" v-else>
             <div class="">
@@ -14,7 +14,9 @@
             </div>
             <img :src="avatar" />
 
-          </div>
+          </div>-->
+          <input type="file" id="file" ref="file" name="avatar" placeholder="Avatar" @change="handleFileUpload()">
+
           <input type="text" name="username" placeholder="username" required v-model="username">
           <input type="email" name="email" placeholder="email" required v-model="email">
           <textarea rows="6" cols="20" name="message" placeholder="Biographie" v-model="bio"></textarea>
@@ -57,39 +59,43 @@ export default {
       username: '',
       bio: '',
       boxNewPassWd: '',
+      file: ''
     }
   },
   methods: {
-    avatarChange(e) {
-      let files = e.target.files || e.dataTransfer.files;
-      if (!files.length)
-        return;
-        this.createImage(files[0]);
-    },
-    createImage(file) {
-      let avatar = new Image
-      console.log(avatar);
-      let reader = new FileReader();
-      let vm = this;
-
-      reader.onload = (e) => {
-        vm.avatar = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    },
-    removeImage: function (e) {
-      this.avatar = '';
-      console.log(e);
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
     },
     editProfile() {
-      console.log(this.myUser);
-      axios.put('http://localhost:3000/edit/' + this.myUser.userId, {
-        //avatar: this.avatar,
-        email: this.email,
-        username: this.username,
-        bio: this.bio
+      let formData = new FormData();
+
+      formData.append('avatar', this.file);
+      formData.append('email', this.email);
+      formData.append('username', this.username);
+      formData.append('bio', this.bio);
+      console.table(formData);
+      axios.put('http://localhost:3000/edit/' + this.myUser.userId, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
+      .then(function(){
+        console.log('SUCCESS');
+      })
+      .catch(function(){
+        console.error('FAILURE');
+      });
+
     }
+    //editProfile() {
+    //  console.log(this.myUser);
+    //  axios.put('http://localhost:3000/edit/' + this.myUser.userId, {
+    //    url_image: this.avatar,
+    //    email: this.email,
+    //    username: this.username,
+    //    bio: this.bio
+    //  })
+    //}
   },
 
   mounted () {
