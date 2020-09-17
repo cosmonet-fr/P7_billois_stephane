@@ -1,5 +1,5 @@
 <template>
-  <div v-if="token" class="meta">
+  <div v-if="isOpen === true || token === true" class="meta">
     <div class="avatar">
       <a :href="'http://localhost:8080/user/'+myUser.userId">
         <img :src="profile.url_image" :alt="profile.username">
@@ -37,6 +37,7 @@ export default {
       token: null,
       myUser: 2, // utiliser l'id du token
       menu: false,
+      isOpen: true,
 
     }
   },
@@ -53,6 +54,7 @@ export default {
     logout: function() {
       const router = this.$router;
       localStorage.removeItem("token");
+      this.isOpen = false
       router.push("/")
 
     }
