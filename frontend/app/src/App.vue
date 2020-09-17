@@ -2,17 +2,35 @@
   <div id="app">
     <div id="nav">
       <header>
-        <img alt="Groupomania logo" src="./assets/icon.svg">
-        <h1>Groupomania</h1>
+        <div class="logo_box">
+          <a href="http://localhost:8080/Wall"><img alt="Groupomania logo" src="./assets/icon.svg"></a>
+          <!--<h1>Groupomania</h1>-->
+        </div>
+        <div class="meta_box">
+          <MetaGsm/>
+        </div>
       </header>
+
       <!--<router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/wall">Wall</router-link> |
-      <router-link to="/user">User</router-link>-->
+      <router-link to="/user">Utilisateur</router-link>-->
     </div>
     <router-view/>
   </div>
 </template>
+
+<script>
+import MetaGsm from '@/components/MetaGsm.vue'
+
+export default {
+  name: 'Password',
+  components: { MetaGsm },
+
+
+}
+
+</script>
 
 <style lang="scss">
 $color1: #fd2d01;
@@ -110,15 +128,25 @@ body {
     background-image: url("./assets/wallpaper_desk.jpg");
   }
 }
+header, .logo_box {
+  img {
+    width: 3rem;
+  }
+}
 header {
   margin: 0;
   padding: 2em;
   display: flex;
+  justify-content: space-between;
   background-color: white;
   opacity: .9;
-  img {
-    width: 3rem;
-  }
+}
+.logo_box {
+  display: flex;
+}
+.meta_box {
+  display: flex;
+
 }
 #app {
   font-family: 'nevis-FontZillion', Avenir, Helvetica, Arial, sans-serif;

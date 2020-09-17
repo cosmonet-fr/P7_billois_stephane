@@ -79,6 +79,7 @@
 </template>
 
 <script>
+//location.reload();
 export default {
   methods: {
     submitSignup: function() {
@@ -142,7 +143,6 @@ h3 {
   font-size: 1.5em;
   font-weight: bold;
 }
-
 .home {
   @media (min-width: 1280px) {
     display: flex;

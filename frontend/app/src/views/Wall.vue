@@ -4,11 +4,10 @@
     <div class="page_wall">
 
       <a href="../new_message"><div class="button">
-        <p>Écrire un message</p>
+        <p>Écrire un message</p><i class="fab fa-node"></i>
       </div></a>
 
       <div class="meta">
-        <p><a :href="'/user/'+myUser.userId">Mon Profil</a></p>
 
       </div>
       <div class="allPosts">
@@ -20,7 +19,11 @@
           <div class="post_text">
             <h4><a :href="'message/'+message.id">{{ message.title }}</a> <!--| <span>{{ message.updatedAt }}</span>--></h4>
             <div class="bubble">
-              <a :href="'message/'+message.id"><img v-if="message.attachement !== null" :src="message.attachement" alt="media"></a>
+              <div class="media" v-if="message.attachement">
+                <a :href="'message/'+message.id">
+                  <img :src="message.attachement" alt="media">
+                </a>
+              </div>
               <p>{{ message.content }}</p>
             </div>
           </div>

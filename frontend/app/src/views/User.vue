@@ -7,7 +7,7 @@
     <div class="profile">
       <div class="profile_head">
         <h4>{{ profile.username }}</h4>
-        <p class="edit_btn" v-if="myUser.userId == $route.params.id"><a href="../user_edit">[Modifier mon profil]</a></p>
+        <a href="../user_edit" v-if="myUser.userId == $route.params.id"> <img class="edit_btn" src="../assets/pen-solid.svg" alt="Modifier mon profil"> </a>
       </div>
       <p>{{ profile.bio }}</p>
     </div>
@@ -56,14 +56,9 @@ export default {
 
 <style scoped lang="scss">
 .edit_btn {
-  margin: .8em;
-  text-align: center;
-  font-size: 1.2em;
-  font-weight: bold;
-  a{
-    text-decoration: none;
-  }
+  width: 2rem;
 }
+
 .wall {
   width: 100%;
   height: 100%;
