@@ -22,7 +22,6 @@ exports.signup = (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  console.table(req.body);
   bcrypt.hash(req.body.password, 10)
   .then(hash => {
     User.create({
@@ -57,7 +56,6 @@ exports.login = (req, res, next) => {
   async function login() {
 
     const login = await User.findOne({ where: { email: email } });
-    //console.table(User.findOne(id));
 if (login === null) {
   return res.status(400).json({ errors: ["Email ou mot de passe invalide"]  });
 
@@ -70,13 +68,11 @@ if (login === null) {
 
       } else {
         // Il faut ajouter l'id de l'utilisateur dans le TOKEN
-        console.table(login.id);
         var token = jwt.sign({ userId: login.id }, 'RANDOM_TOKEN_SECRET', { expiresIn: '3h' });
         return res.status(200).json({ token: token });
 
       }
   });
-  console.log(login.email);
   //res.json("Email et mot de passe ok !!!");
 }
 
@@ -92,7 +88,6 @@ exports.getAllUsers = (req, res, next) => {
     const sequelize = require('../connectDB');
     const { QueryTypes } = require('sequelize');
     const usersList = await sequelize.query("SELECT id, username, email, moderator FROM Users", { type: QueryTypes.SELECT })
-    console.table(usersList);
     return res.status(200).json(usersList);
   }
   startGetAllUsers();
@@ -157,7 +152,6 @@ exports.edit = (req, res, next) => {
 
   // Get req.body data
   async function startEditProfil() {
-    console.debug(User);
     await User.update({
       email: req.body.email,
       username: req.body.username,
@@ -167,7 +161,6 @@ exports.edit = (req, res, next) => {
   }
   // Get url avatar if she existed
   async function startEditAvatar(url) {
-    console.debug(User);
     await User.update({
       url_image: url
     },

@@ -79,11 +79,10 @@
 </template>
 
 <script>
-//location.reload();
 export default {
   methods: {
     submitSignup: function() {
-      const router = this.$router;
+      //const router = this.$router;
       const axios = require('axios');
       if (this.route === 'login') {
         axios.post('http://localhost:3000/' + this.route, {
@@ -93,7 +92,7 @@ export default {
         .then(function (res) {
           console.log(res.data);
           localStorage.setItem("token", res.data.token);
-          router.push("Wall")
+          window.location.href='/Wall'
         })
         .catch(error => {
           this.error = error.response.data.errors[0]

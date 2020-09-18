@@ -1,9 +1,7 @@
 <template>
   <div id="wall" class="wall">
     <div class="admin_box">
-      <h3>Vous êtes {{ role }}, de grands pouvoirs impliquent de grandes responsabilités.</h3>
-      <p>admin: {{ admin }}</p>
-      <p>moderator: {{ moderator }}</p>
+      <h3>De grands pouvoirs impliquent de grandes responsabilités.</h3>
       <p>{{ msg }}</p>
       <hr>
       <div v-if="moderator" class="list_box">
@@ -11,7 +9,7 @@
           <div class="element_id" ><p>ID</p></div><div class="element" ><p>User Name</p></div><div class="element" ><p>Email</p></div><div class="element_id" ><p>Suppr</p></div><div class="element_id" ><p>Mod</p></div>
         </div>
         <div class="list_line" v-for="user in users" :key="user">
-          <div class="element_id" ><p><a :href="'user/'+user.id">{{ user.id }}</a></p></div><div class="element" ><p><a :href="'user/'+user.id">{{ user.username}}</a></p></div><div class="element" ><p> <a :href="'mailto:'+user.email">{{ user.email }}</a> </p></div><div class="element_id" ><p class="error a" v-on:click="removeUser(user.id)" >[X]</p></div><div class="element_id" ><p class="a" v-on:click="isModerator(user.id)">{{ user.moderator }}</p></div>
+          <div class="element_id" ><p><a :href="'user/'+user.id">{{ user.id }}</a></p></div><div class="element" ><p><a :href="'user/'+user.id">{{ user.username}}</a></p></div><div class="element" ><p> <a :href="'mailto:'+user.email">{{ user.email }}</a> </p></div><div v-if="!user.moderator" class="element_id" ><p class="error a" v-on:click="removeUser(user.id)" >[X]</p></div><div v-if="user.moderator" class="element_id" ><p class="inactive">[X]</p></div><div class="element_id" ><p class="a" v-on:click="isModerator(user.id)">{{ user.moderator }}</p></div>
         </div>
 
       </div>
@@ -27,14 +25,13 @@ import VueJwtDecode from 'vue-jwt-decode'
   export default {
     data: function ()  {
       return {
-        role: 'Administrateur',
         admin: 0,
         moderator: 0,
         token: '',
         myUser: '',
-        test: [],
         users: [],
         msg: '',
+        query: false,
       }
     },
     mounted () {
@@ -53,13 +50,17 @@ import VueJwtDecode from 'vue-jwt-decode'
         axios.post('http://localhost:3000/admin_panel/userRm', {
           idRm: idRm,
         })
-        .then(response => (this.msg = response.data))
+        location.reload();
+
       },
       isModerator: function(idMod) {
         const axios = require('axios');
         axios.put('http://localhost:3000/admin_panel/is_moderator', {
           moderator: idMod,
         })
+        location.reload();
+
+
       }
     }
   }

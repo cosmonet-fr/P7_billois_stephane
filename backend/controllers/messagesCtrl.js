@@ -15,7 +15,6 @@ exports.new = (req, res, next) => {
     await Message.create({user_id: req.params.id, title: req.body.title, content: req.body.message });
   }
   async function addMedia(url) {
-    console.debug(Message);
     await Message.create({user_id: req.params.id, title: req.body.title, content: req.body.message, attachement: url });
   }
 }
@@ -40,8 +39,6 @@ exports.edit = (req, res, next) => {
     })
   }
   async function addMedia(url) {
-    console.debug(Message);
-    console.log(req.params.idPOST);
     await Message.update({
       attachement: url
     },
@@ -68,7 +65,6 @@ exports.publicWall = ( req, res, next) => {
     const sequelize = require('../connectDB');
     const { QueryTypes } = require('sequelize');
     const publicWall = await sequelize.query("SELECT Messages.title, Messages.content, Messages.attachement, Messages.createdAt, Messages.updatedAt, Messages.id, Messages.user_id, Users.url_image, Users.username FROM Messages INNER JOIN Users ON Messages.user_id = Users.id", { type: QueryTypes.SELECT })
-    console.table(publicWall);
     return res.status(200).json(publicWall);
   }
   getThePublicWall();
@@ -83,8 +79,6 @@ exports.wallOf = (req, res, next) => {
       where: { user_id: id },
       attributes: ['id', 'user_id', 'title', 'content', 'attachement', 'likes', 'createdAt', 'updatedAt' ]
     });
-    console.table(thisWall);
-    //console.log(req.params.id);
     return res.status(200).json(thisWall);
   }
   getTheWallOf(req.params.id);
@@ -99,7 +93,6 @@ exports.onePost = (req, res, next) => {
       where: { id: id },
       attributes: ['id', 'user_id', 'title', 'content', 'attachement', 'likes', 'createdAt', 'updatedAt' ]
     });
-    //console.log(req.params.id);
     return res.status(200).json(thisPost);
   }
   getOnePost(req.params.id_post)

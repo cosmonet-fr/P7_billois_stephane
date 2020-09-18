@@ -1,14 +1,13 @@
 <template>
   <div class="newPassWd">
 
-    <div class="newPost">
-      <form id="newPost" @submit.prevent="editProfile">
-        <div class="newPostText">
+    <div >
+      <form id="newPost" @submit.prevent="editPass">
           <!--<input type="file" name="avatar" v-model="avatar">-->
           <input type="password" name="password" placeholder="Votre mot de passe actuel" required v-model="password">
           <input type="password" name="newPassword" placeholder="Votre nouveau mot de passe" required v-model="newPassword">
           <input type="password" name="newPassword" placeholder="Confirmez votre nouveau mot de passe" required >
-        </div>
+
         <input class="button" type="submit" value="Changer" />
       </form>
     </div>
@@ -17,27 +16,38 @@
 </template>
 
 <script>
-//import VueJwtDecode from 'vue-jwt-decode'
+import VueJwtDecode from 'vue-jwt-decode'
 export default {
   data: function () {
     return {
       password: '',
       newPassword: '',
-      token: null,
-      myUser: 2, // utiliser l'id du token
+      token: '',
+      myUser: '', // utiliser l'id du token
 
     }
   },
+  mounted () {
+    this.token = localStorage.getItem('token');
+    this.myUser = VueJwtDecode.decode(this.token);
+
+  },
   methods: {
-    editProfile() {
+    editPass() {
+      const router = this.$router;
       const axios = require('axios');
-      //this.myUser = VueJwtDecode.decode(this.token);
-      //this.token = localStorage.getItem('token');
-      //axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
-      axios.put('http://localhost:3000/new_passwd/' + this.myUser, {
+      axios.defaults.headers.common['Authorization'] = "Bearer " + this.token;
+      axios.put('http://localhost:3000/new_passwd/' + this.myUser.userId, {
         password: this.password,
         newPassword: this.newPassword
       })
+      .then(function(){
+        console.log('SUCCESS');
+        router.push("../Wall")
+      })
+      .catch(function(){
+        console.error('FAILURE');
+      });
 
     }
   },
@@ -60,11 +70,16 @@ li {
 a {
   color: #42b983;
 }
+form {
+  display: flex;
+  flex-direction: column;
+}
 input {
   font-size: 1em;
   background-color: #fff;
 }
 .button {
+  max-width: 200px;
   margin: 1em;
   width: 50%;
   border-radius: 50% 20% / 10% 40%;

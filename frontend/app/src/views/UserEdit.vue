@@ -4,17 +4,7 @@
     <form id="edit" @submit.prevent="editProfile">
       <div class="editText">
         <div class="edit_box">
-          <!--<div v-if="!avatar">
-            <img :src="avatar" />
-            <input type="file" id="file" ref="file" name="avatar" placeholder="Avatar" @change="handleFileUpload()">
-          </div>
-          <div class="avatar" v-else>
-            <div class="">
-              <button class="button" @click="removeImage">Changer d'image</button>
-            </div>
-            <img :src="avatar" />
-
-          </div>-->
+          <p>Votre Avatar:</p>
           <input type="file" id="file" ref="file" name="avatar" placeholder="Avatar" @change="handleFileUpload()">
 
           <input type="text" name="username" placeholder="username" required v-model="username">
@@ -22,13 +12,11 @@
           <textarea rows="6" cols="20" name="message" placeholder="Biographie" v-model="bio"></textarea>
           <input class="button" type="submit" value="Valider" />
 
-          <p class="a" v-if="!boxNewPassWd" v-on:click="boxNewPassWd = 1">[Changer de mot de passe]</p>
+          <p><a href="../pass_wd_edit">[Changer de mot de passe]</a></p>
 
           <p> <a class="error" href="../remove_me">[supprimer mon compte]</a></p>
         </div>
-        <div class="edit_box" v-if="boxNewPassWd" >
-          <NewPassWd/>
-        </div>
+
       </div>
 
     </form>
@@ -42,13 +30,9 @@
 
 <script>
 const axios = require('axios');
-//import Wall from '@/components/public_wall.vue'
-import NewPassWd from '@/components/NewPassWd.vue'
 import VueJwtDecode from 'vue-jwt-decode'
 
 export default {
-  name: 'Password',
-  components: { NewPassWd },
   data: function () {
     return {
       token: null,
@@ -58,7 +42,6 @@ export default {
       email: '',
       username: '',
       bio: '',
-      boxNewPassWd: '',
       file: ''
     }
   },
@@ -81,22 +64,14 @@ export default {
       })
       .then(function(){
         console.log('SUCCESS');
-        router.push("Wall")
+        router.push("../Wall")
       })
       .catch(function(){
         console.error('FAILURE');
       });
 
     }
-    //editProfile() {
-    //  console.log(this.myUser);
-    //  axios.put('http://localhost:3000/edit/' + this.myUser.userId, {
-    //    url_image: this.avatar,
-    //    email: this.email,
-    //    username: this.username,
-    //    bio: this.bio
-    //  })
-    //}
+
   },
 
   mounted () {
@@ -139,31 +114,15 @@ export default {
   @media (min-width: 1280px) {
     display: flex;
     flex-direction: column;
-    margin: 0em 20em -3em 20em;
+    margin: 2em 20em;
   }
 }
-.avatar {
-  display:flex;
-  flex-direction: column-reverse;
-  img { // A obtimiser
-    margin: 1em;
-    border-radius: 50% 10%;
-    width: 50%;
-    height: 50%;
-    border: solid .5em #ffffffdd;
-  }
-  @media (min-width: 1280px) {
-    img {
-      width: 19%;
-    }
-  }
-}
-.profile_head {
-  padding: 4em 1em 1em 1em;
-  text-align: center;
-}
+
 #edit {
   margin: 0 1em;
+}
+#file {
+  font-size: 0.7rem;
 }
 input {
   font-size: 1em;
@@ -175,6 +134,7 @@ textarea {
 }
 .button {
   margin: 1em;
+  max-width: 200px;
   width: 50%;
   border-radius: 50% 20% / 10% 40%;
   padding: 1.5em;

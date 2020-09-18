@@ -49,6 +49,11 @@ const routes = [
     component: () => import('../views/UserEdit.vue')
   },
   {
+    path: '/pass_wd_edit',
+    name: 'PassWdEdit',
+    component: () => import('../views/PassWdEdit.vue')
+  },
+  {
     path: '/remove_me',
     name: 'RemoveMe',
     component: () => import('../views/RemoveMe.vue')
