@@ -50,7 +50,6 @@ export default {
       this.file = this.$refs.file.files[0];
     },
     editProfile() {
-      const router = this.$router;
       let formData = new FormData();
 
       formData.append('avatar', this.file);
@@ -64,7 +63,7 @@ export default {
       })
       .then(function(){
         console.log('SUCCESS');
-        router.push("../Wall")
+        window.location.href='../Wall'
       })
       .catch(function(){
         console.error('FAILURE');

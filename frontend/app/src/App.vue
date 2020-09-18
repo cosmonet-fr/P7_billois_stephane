@@ -3,8 +3,11 @@
     <div id="nav">
       <header>
         <div class="logo_box">
-          <a href="http://localhost:8080/Wall"><img alt="Groupomania logo" src="./assets/icon.svg"></a>
-          <!--<h1>Groupomania</h1>-->
+          <a href="http://localhost:8080/Wall">
+            <img alt="Groupomania logo" src="./assets/icon.svg">
+          </a>
+          <h1 class="groupomania" >Groupomania</h1>
+
         </div>
         <div class="meta_box">
           <MetaGsm/>
@@ -58,8 +61,16 @@ h1 {
   span {
     color: black;
   }
+  a {
+    text-decoration: none;
+  }
   @media (min-width: 1280px) {
     font-size: 3em;
+  }
+}
+.groupomania {
+  @media (max-width: 1280px) {
+    display: none;
   }
 }
 h2 {

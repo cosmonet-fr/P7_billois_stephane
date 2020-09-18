@@ -1,9 +1,0 @@
-{
-	"version": 3,
-	"file": "loginPage.css",
-	"sources": [
-		"loginPage.scss"
-	],
-	"names": [],
-	"mappings": "AAAA,AAAA,IAAI,CAAC;EACH,gBAAgB,EAAE,oCAAoC;EACtD,eAAe,EAAE,KAAK;EACtB,iBAAiB,EAAE,SAAS;CAI7B;;AAHC,MAAM,EAAE,SAAS,EAAE,MAAM;EAJ3B,AAAA,IAAI,CAAC;IAKD,gBAAgB,EAAE,qCAAqC;GAE1D"
-}

@@ -6,13 +6,12 @@
       </a>
     </div>
 
-    <div class="menu_btn">
-      <img v-if="!menu" @click="menu = true" src="../assets/bars-solid.svg" alt="">
-    </div>
+
 
     <div v-if="menu" class="menu">
+
       <div v-if="profile.moderator == 1 || profile.admin == 1" class="admin_btn">
-        <a href="http://localhost:8080/admin_panel"><img src="../assets/users-cog-solid.svg" alt=""></a>
+        <a href="http://localhost:8080/Wall"><img src="../assets/comment-regular.svg" alt=""></a>
       </div>
 
       <div class="editMyProfile">
@@ -23,6 +22,17 @@
         <img @click="logout()" src="../assets/sign-out-alt-solid.svg" alt="">
       </div>
 
+      <div v-if="profile.moderator == 1 || profile.admin == 1" class="admin_btn">
+        <a href="http://localhost:8080/admin_panel"><img src="../assets/users-cog-solid.svg" alt=""></a>
+      </div>
+
+      <div class="menu_btn">
+        <img v-if="menu" @click="menu = false" src="../assets/times-solid.svg" alt="">
+      </div>
+
+    </div>
+    <div class="menu_btn">
+      <img v-if="!menu" @click="menu = true" src="../assets/bars-solid.svg" alt="">
     </div>
 
   </div>
