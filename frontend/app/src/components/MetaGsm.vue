@@ -26,9 +26,9 @@
         <a href="http://localhost:8080/admin_panel"><img src="../assets/users-cog-solid.svg" alt=""></a>
       </div>
 
-      <div class="menu_btn">
+      <!--<div class="menu_btn">
         <img v-if="menu" @click="menu = false" src="../assets/times-solid.svg" alt="">
-      </div>
+      </div>-->
 
     </div>
     <div class="menu_btn">
