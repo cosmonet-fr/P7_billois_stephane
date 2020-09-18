@@ -17,7 +17,7 @@
 
         <div class="post_text">
           <div class="bubble">
-            <h5>{{ message.title }} | <span>{{ message.updatedAt }}</span></h5>
+            <h5> <a :href="'../message/'+message.id">{{ message.title }}</a> </h5>
             <p>{{ message.content }}</p>
           </div>
         </div>
