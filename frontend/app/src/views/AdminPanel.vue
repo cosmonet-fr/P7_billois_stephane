@@ -6,16 +6,16 @@
       <hr>
       <div v-if="moderator" class="list_box">
         <div class="list_line">
-          <div class="element_id" ><p>ID</p></div><div class="element" ><p>User Name</p></div><div class="element" ><p>Email</p></div><div class="element_id" ><p>Suppr</p></div><div class="element_id" ><p>Mod</p></div>
+          <div class="element_id head_list" ><p>ID</p></div><div class="element head_list" ><p>User Name</p></div><div class="element head_list" ><p>Email</p></div><div class="element_id head_list" ><p>Suppr</p></div><div class="element_id head_list" ><p>Mod</p></div>
         </div>
         <div class="list_line" v-for="user in users" :key="user">
-          <div class="element_id" ><p><a :href="'user/'+user.id">
+          <div id="id" class="element_id" ><p><a :href="'user/'+user.id">
             {{ user.id }}</a></p>
           </div>
           <div class="element" >
             <p><a :href="'user/'+user.id">{{ user.username}}</a></p>
           </div>
-          <div class="element" >
+          <div id="email" class="element" >
             <p> <a :href="'mailto:'+user.email">{{ user.email }}</a> </p>
           </div>
           <div v-if="!user.moderator" class="element_id" >
@@ -104,6 +104,10 @@ import VueJwtDecode from 'vue-jwt-decode'
   h3 {
     text-align: center;
   }
+  @media (max-width: 1280px) {
+    width: 100%;
+
+  }
 }
 .list_box {
   display: flex;
@@ -125,13 +129,25 @@ import VueJwtDecode from 'vue-jwt-decode'
   }
   .element {
     width: 33%;
+    @media (max-width: 1280px) {
+      width: 50%;
+    }
   }
   .element_id {
     width: 10%;
+    @media (max-width: 1280px) {
+      width: 25%;
+    }
   }
 }
 .inactive {
   color: #ccc;
+}
+
+.head_list, #id, #email, hr {
+  @media (max-width: 1280px) {
+    display: none;
+  }
 }
 
 </style>
