@@ -13,6 +13,7 @@
     </div>
 
     <div class="wall_of_box">
+      <h4>Messages de {{ profile.username }}:</h4>
       <div class="post" v-for="message in messages" :key="message.content">
 
         <div class="post_text">

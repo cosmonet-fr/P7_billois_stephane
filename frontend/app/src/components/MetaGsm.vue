@@ -10,7 +10,7 @@
 
     <div v-if="menu" class="menu">
 
-      <div v-if="profile.moderator == 1 || profile.admin == 1" class="admin_btn">
+      <div >
         <a href="http://localhost:8080/Wall"><img src="../assets/comment-regular.svg" alt=""></a>
       </div>
 

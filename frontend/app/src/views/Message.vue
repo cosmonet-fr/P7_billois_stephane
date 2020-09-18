@@ -1,6 +1,5 @@
 <template>
   <div id="wall" class="wall">
-
     <div class="allPosts">
       <div class="post">
 
@@ -17,6 +16,30 @@
             </div>
           </div>
         </div>
+
+        <div class="button">
+          <p> <a :href="'../comment/' + myUser.userId + '&' + $route.params.id">Commenter</a></p>
+        </div>
+        <div class="post_comment">
+          <div class="box_comment" v-for="comment in comments" :key="comment.content">
+            <div class="post_text">
+              <h4><a :href="'../message/'+comment.id">{{ comment.title }}</a> <!--| <span>{{ message.updatedAt }}</span>--></h4>
+              <div class="bubble_comment">
+                <div class="media" v-if="comment.attachement">
+                  <a :href="'../message/'+comment.id">
+                    <img :src="comment.attachement" alt="media">
+                  </a>
+                </div>
+                <p>{{ comment.content }}</p>
+              </div>
+            </div>
+            <div class="user_post">
+              <img :src="comment.url_image" alt="avatar">
+              <p class="username"><a :href="'user/'+comment.user_id">{{ comment.username }}</a></p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -36,6 +59,7 @@ export default {
       token: null,
       myUser: null,
       message: [],
+      comments: [],
       youAreModerator: 0
 
     }
@@ -47,6 +71,10 @@ export default {
     this.myUser = VueJwtDecode.decode(this.token);
     axios.get('http://localhost:3000/message/post/' + this.$route.params.id)
     .then(response => (this.message = response.data))
+
+    //Comments ok this post
+    axios.get('http://localhost:3000/message/comments/' + this.$route.params.id)
+    .then(response => (this.comments = response.data))
 
     //Le visiteur est-il admin ?
     axios.get('http://localhost:3000/users/' + this.myUser.userId)
@@ -90,44 +118,89 @@ h4 {
   background-color: #eee;
 }
 .allPosts {
-display: flex;
-flex-direction: column-reverse;
-justify-content: flex-start;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
 }
 .post {
-margin: 1em;
-display: flex;
-justify-content: space-around;
+  margin: 1em;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  @media (max-width: 1280px) {
+    margin: 1em 0;
+  }
+}
+.box_comment {
+  width: 70%;
+  margin: 1em;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  @media (max-width: 1280px) {
+    margin: 1em 0;
+    width: 95%;
+  }
 }
 .user_post {
-width: 30%;
-img {
-  border-radius: 50%;
-  width: 95%;
-}
+  width: 12%;
+  img {
+    border-radius: 50%;
+    width: 95%;
+  }
 }
 .post_text {
-width: 70%;
-
+  width: 85%;
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
+}
+//.post_comment {
+//  display: flex;
+//  flex-direction: row;
+//}
+.bubble, .bubble_comment {
+  padding: 1.8em;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 .bubble {
-padding: 1.8em;
-background-color: rgba(255, 255, 255, 0.8);
-border-radius: 0 5em 5em 5em;
+  border-radius: 0 5em 5em 5em;
+}
+.bubble_comment {
+  border-radius: 5em 0 5em 5em;
+}
+.button {
+  * {
+    text-align: center;
+  }
+  a {
+    color: #fff;
+  }
+  margin: 1em;
+  max-width: 200px;
+  width: 50%;
+  border-radius: 50% 20% / 10% 40%;
+  padding: .8em;
+  font-size: 1em;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  background-color: #3498db;
+  border-width: 0;
 }
 .username {
-text-align: center;
-font-weight: bold;
+  text-align: center;
+  font-weight: bold;
 }
 
 .newPost {
-margin: 3em;
-padding: 2em;
-background-color: $backgrounColor1;
-border-radius: 3em 0;
-input[type="submit"] {
-  font-size: 1em;
-}
+  margin: 3em;
+  padding: 2em;
+  background-color: $backgrounColor1;
+  border-radius: 3em 0;
+  input[type="submit"] {
+    font-size: 1em;
+  }
 
 }
 

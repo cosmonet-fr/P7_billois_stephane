@@ -28,4 +28,10 @@ router.get('/wall_of/:id(\\d+)', auth, messagesCtrl.wallOf);
 //Get one post
 router.get('/post/:id_post(\\d+)', auth, messagesCtrl.onePost);
 
+//Get comments of
+router.get('/comments/:id_post(\\d+)', auth, messagesCtrl.commentsOf);
+
+// new Comment
+router.post('/new_comment/:id&:idCOMMENT', auth2, multerMedia, messagesCtrl.newComment);
+
 module.exports = router;
