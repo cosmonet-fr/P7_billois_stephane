@@ -5,8 +5,11 @@ const auth = require('../auth');
 const isAdmin = require('../isAdmin');
 const isModerator = require('../isModerator');
 
-
+// Add moderator
 router.put('/is_moderator', auth, isAdmin, adminCtrl.isModerator);
+
+//Remove Moderator
+router.put('/is_not_moderator', auth, isAdmin, adminCtrl.isNotModerator);
 
 //DELETE Message !
 router.post('/postRm/:idPOST(\\d+)', auth, isModerator, adminCtrl.deleteMessage);

@@ -9,7 +9,27 @@
           <div class="element_id" ><p>ID</p></div><div class="element" ><p>User Name</p></div><div class="element" ><p>Email</p></div><div class="element_id" ><p>Suppr</p></div><div class="element_id" ><p>Mod</p></div>
         </div>
         <div class="list_line" v-for="user in users" :key="user">
-          <div class="element_id" ><p><a :href="'user/'+user.id">{{ user.id }}</a></p></div><div class="element" ><p><a :href="'user/'+user.id">{{ user.username}}</a></p></div><div class="element" ><p> <a :href="'mailto:'+user.email">{{ user.email }}</a> </p></div><div v-if="!user.moderator" class="element_id" ><p class="error a" v-on:click="removeUser(user.id)" >[X]</p></div><div v-if="user.moderator" class="element_id" ><p class="inactive">[X]</p></div><div class="element_id" ><p class="a" v-on:click="isModerator(user.id)">{{ user.moderator }}</p></div>
+          <div class="element_id" ><p><a :href="'user/'+user.id">
+            {{ user.id }}</a></p>
+          </div>
+          <div class="element" >
+            <p><a :href="'user/'+user.id">{{ user.username}}</a></p>
+          </div>
+          <div class="element" >
+            <p> <a :href="'mailto:'+user.email">{{ user.email }}</a> </p>
+          </div>
+          <div v-if="!user.moderator" class="element_id" >
+            <p class="error a" v-on:click="removeUser(user.id)" >[X]</p>
+          </div>
+          <div v-if="user.moderator" class="element_id" >
+            <p class="inactive">[X]</p>
+          </div>
+          <div v-if="!user.moderator" class="element_id" >
+            <p class="a" v-on:click="isModerator(user.id)">{{ user.moderator }}</p>
+          </div>
+          <div v-if="user.moderator" class="element_id" >
+            <p class="a" v-on:click="isNotModerator(user.id)">{{ user.moderator }}</p>
+          </div>
         </div>
 
       </div>
@@ -59,8 +79,13 @@ import VueJwtDecode from 'vue-jwt-decode'
           moderator: idMod,
         })
         location.reload();
-
-
+      },
+      isNotModerator: function(idMod) {
+        const axios = require('axios');
+        axios.put('http://localhost:3000/admin_panel/is_not_moderator', {
+          moderator: idMod,
+        })
+        location.reload();
       }
     }
   }
@@ -104,6 +129,9 @@ import VueJwtDecode from 'vue-jwt-decode'
   .element_id {
     width: 10%;
   }
+}
+.inactive {
+  color: #ccc;
 }
 
 </style>

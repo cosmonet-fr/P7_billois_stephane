@@ -12,7 +12,7 @@
 
     <div v-if="menu" class="menu">
       <div v-if="profile.moderator == 1 || profile.admin == 1" class="admin_btn">
-        <img src="../assets/users-cog-solid.svg" alt="">
+        <a href="http://localhost:8080/admin_panel"><img src="../assets/users-cog-solid.svg" alt=""></a>
       </div>
 
       <div class="editMyProfile">

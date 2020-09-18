@@ -11,6 +11,16 @@ exports.isModerator = (req, res, next) => {
     return res.status(200).json({ moderator: req.body.moderator })
 }
 
+exports.isNotModerator = (req, res, next) => {
+  async function isModerator(id) {
+    await User.update({ moderator: 0 }, {
+      where: { id: id }
+    }
+    )}
+    isModerator(req.body.moderator);
+    return res.status(200).json({ moderator: req.body.moderator })
+}
+
 //Delete Message
 exports.deleteMessage = (req, res, next) => {
   async function deleteMessage() {
