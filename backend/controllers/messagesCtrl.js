@@ -64,7 +64,7 @@ exports.publicWall = ( req, res, next) => {
   async function getThePublicWall() {
     const sequelize = require('../connectDB');
     const { QueryTypes } = require('sequelize');
-    const publicWall = await sequelize.query("SELECT Messages.title, Messages.content, Messages.attachement, Messages.createdAt, Messages.updatedAt, Messages.id, Messages.user_id, Users.url_image, Users.username FROM Messages INNER JOIN Users ON Messages.user_id = Users.id WHERE parent_id IS NULL", { type: QueryTypes.SELECT })
+    const publicWall = await sequelize.query("SELECT Messages.title, Messages.content, Messages.attachement, Messages.createdAt, Messages.updatedAt, Messages.id, Messages.user_id, Users.url_image, Users.username FROM Messages INNER JOIN Users ON Messages.user_id = Users.id WHERE parent_id IS NULL ORDER BY createdAt", { type: QueryTypes.SELECT })
     return res.status(200).json(publicWall);
   }
   getThePublicWall();
@@ -103,7 +103,7 @@ exports.commentsOf = (req, res, next) => {
   async function getComments(parentId) {
     const sequelize = require('../connectDB');
     const { QueryTypes } = require('sequelize');
-    const publicWall = await sequelize.query("SELECT Messages.id, Messages.user_id, Messages.title, Messages.content, Messages.attachement, Messages.createdAt, Messages.updatedAt, Users.url_image, Users.username FROM Messages INNER JOIN Users ON Messages.user_id = Users.id WHERE parent_id = " + parentId + ";", { type: QueryTypes.SELECT })
+    const publicWall = await sequelize.query("SELECT Messages.id, Messages.user_id, Messages.title, Messages.content, Messages.attachement, Messages.createdAt, Messages.updatedAt, Users.url_image, Users.username FROM Messages INNER JOIN Users ON Messages.user_id = Users.id WHERE parent_id = " + parentId + " ORDER BY createdAt;", { type: QueryTypes.SELECT })
     return res.status(200).json(publicWall);
     //const comments = await Message.findAll({
     //  where: { parent_id: parentId },
